@@ -1,4 +1,4 @@
-package com.xinaml.parent;
+package com.xinaml.order;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ParentApplicationTests {
+public class OrderApplicationTests {
 
     @Test
     public void contextLoads() {

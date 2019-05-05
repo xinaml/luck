@@ -1,13 +1,13 @@
-package com.xinaml.parent;
+package com.xinaml.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ParentApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(ParentApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
