@@ -1,0 +1,13 @@
+**/target/
+**/*.log
+**/build/
+**/.gradle/
+**/classes/
+**/gradle/
+**/project/
+**/.sass-cache/
+**/.idea/
+**/*.iml
+.idea/
+.gradle/
+settings.gradle
