@@ -14,7 +14,7 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <name>parent</name>
-    <description>通用父模块</description>
+    <description>功能模块依赖</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -25,10 +25,15 @@
     </properties>
 
     <dependencies>
-
+        <!--服务治理注册-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--web服务依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

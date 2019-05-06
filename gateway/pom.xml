@@ -2,27 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--引入父项目-->
     <parent>
         <groupId>com.xinaml</groupId>
         <artifactId>parent</artifactId>
         <version>1.0</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
-
     <groupId>com.xinaml</groupId>
-    <artifactId>eureka</artifactId>
+    <artifactId>gateway</artifactId>
     <version>${luck.version}</version>
-    <name>eureka</name>
-    <description>服务治理</description>
-    <packaging>jar</packaging>
+    <name>gateway</name>
+    <description>服务网关</description>
 
 
-    <!--服务治理依赖-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <!--熔断器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
     </dependencies>
 
