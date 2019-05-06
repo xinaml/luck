@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class StorageAct {
     @GetMapping("test")
     public String test() {
-        return "test";
+        return "storage test";
     }
 }
