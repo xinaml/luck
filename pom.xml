@@ -13,6 +13,7 @@
     <!--导入模块-->
     <modules>
         <module>eureka</module>
+        <module>gateway</module>
         <module>storage</module>
         <module>order</module>
     </modules>

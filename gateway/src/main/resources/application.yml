@@ -6,13 +6,13 @@ spring:
     gateway:
       routes:
       - id: order
-        uri: http://localhost:8082/test
+        uri: http://localhost:8082
         predicates:
         - Path=/order/**
         filters:
         - StripPrefix=1
       - id: storage
-        uri: http://localhost:8081/test
+        uri: http://localhost:8081
         predicates:
         - Path=/storage/**
         filters:

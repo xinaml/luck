@@ -16,8 +16,4 @@
     <description>订单</description>
     <packaging>jar</packaging>
 
-    <dependencies>
-
-    </dependencies>
-
 </project>
