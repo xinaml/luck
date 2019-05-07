@@ -1,7 +1,22 @@
+#端口
+server:
+  port: 8088
+
 #服务名
 spring:
   application:
     name: gateway
+  redis:
+    host: localhost
+    password: root
+    port: 6379
+
+#注册到服务治理
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#路由
   cloud:
     gateway:
       routes:
@@ -10,20 +25,25 @@ spring:
         predicates:
         - Path=/order/**
         filters:
+#        - Retry=3 //路由重试
         - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
       - id: storage
         uri: http://localhost:8081
         predicates:
         - Path=/storage/**
         filters:
+#        - Retry=3 //路由重试
         - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
 
-#端口
-server:
-  port: 8088
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+
+
 

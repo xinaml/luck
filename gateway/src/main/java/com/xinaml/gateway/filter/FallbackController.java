@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class FallbackController {
-    @GetMapping("/fallback")
+    @GetMapping("fallback")
     public Result fallback() {
-        Result response = new Result();
-        response.setCode("100");
-        response.setMsg("服务暂时不可用!");
-        return response;
+        Result result = new Result();
+        result.setCode("1");
+        result.setMsg("服务暂时不可用!");
+        return result;
     }
+
+
 }

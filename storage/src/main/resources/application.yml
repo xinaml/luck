@@ -1,11 +1,31 @@
+#服务名
 spring:
   application:
     name: storage
 
+#端口
 server:
   port: 8081
 
+#注册到服务治理
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+# 启用熔断器
+feign:
+  hystrix:
+    enabled: true
+
+ribbon:
+  ReadTimeout: 3000
+  ConnectTimeout: 200
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000

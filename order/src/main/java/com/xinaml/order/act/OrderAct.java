@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderAct {
     @Autowired
-    private StorageService feignService;
+    private StorageService storageService;
 
     /**
      * 远程调用
@@ -25,7 +25,17 @@ public class OrderAct {
      */
     @GetMapping("get")
     public Storage get(String name) {
-        Storage rs = feignService.get(name);
+        Storage rs = storageService.get(name);
+        return rs;
+    }
+
+    /**
+     * 超时测试
+     * @return
+     */
+    @GetMapping("timeout")
+    public String timeout() {
+        String rs = storageService.timeout();
         return rs;
     }
 }

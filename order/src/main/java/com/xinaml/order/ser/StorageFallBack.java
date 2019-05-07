@@ -16,4 +16,9 @@ public class StorageFallBack implements StorageService {
     public Storage get(String name) {
         return null;
     }
+
+    @Override
+    public String timeout() {
+        return "服务超时！";
+    }
 }

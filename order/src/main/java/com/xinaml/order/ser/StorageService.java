@@ -17,4 +17,8 @@ public interface StorageService {
     //服务中方法的映射路径
     @GetMapping("get")
     Storage get(@RequestParam("name") String name);
+
+    //服务中方法的映射路径
+    @GetMapping("timeout")
+    String timeout();
 }

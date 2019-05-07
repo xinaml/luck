@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @Copy: [com.xinaml]
  */
 @Configuration
-public class RibbonConfiguration {
+public class RibbonConfigure {
     @Bean
     public IRule ribbonRule(){
         // new RandomRule() 随机轮询
