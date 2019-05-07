@@ -1,4 +1,4 @@
-package com.xinaml.gateway.limiter;
+package com.xinaml.gateway.config;
 
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public class LimiterConfigure {
+public class LimiterConf {
 
     /**
      *  IP 地址来限流
