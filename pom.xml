@@ -12,6 +12,7 @@
 
     <!--导入模块-->
     <modules>
+        <module>jpa</module>
         <module>eureka</module>
         <module>gateway</module>
         <module>storage</module>

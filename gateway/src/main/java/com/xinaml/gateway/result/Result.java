@@ -8,15 +8,15 @@ package com.xinaml.gateway.result;
  * @Copy: [com.changbei]
  */
 public class Result {
-    private String code;
+    private Integer code;
     private String msg;
     private Object data;
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

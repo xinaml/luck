@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @Copy: [com.changbei]
  */
 @Configuration
-public class FeignConfigure {
+public class FeignConf {
 
     @Bean
     public Retryer feignRetryer() {
