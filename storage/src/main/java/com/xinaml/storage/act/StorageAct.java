@@ -1,5 +1,6 @@
 package com.xinaml.storage.act;
 
+import com.xinaml.storage.entity.Storage;
 import com.xinaml.storage.ser.StorageSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class StorageAct {
     private StorageSer storageSer;
 
     @GetMapping("get")
-    public String get(String name) {
-        return storageSer.get()+"name:"+name;
+    public Storage get(String name) {
+        return storageSer.get(name);
     }
 }

@@ -1,5 +1,6 @@
-package com.xinaml.order.act.ser;
+package com.xinaml.order.ser;
 
+import com.xinaml.order.entity.Storage;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,12 +8,12 @@ import org.springframework.stereotype.Component;
  * @Date: [19-5-6 下午6:02]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 @Component
 public class StorageFallBack implements StorageService {
     @Override
-    public String get(String name) {
-        return "error";
+    public Storage get(String name) {
+        return null;
     }
 }

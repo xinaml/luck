@@ -1,6 +1,7 @@
 package com.xinaml.order.act;
 
-import com.xinaml.order.act.ser.StorageService;
+import com.xinaml.order.ser.StorageService;
+import com.xinaml.order.entity.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,8 @@ public class OrderAct {
      * @return
      */
     @GetMapping("get")
-    public String get(String name) {
-        String rs = feignService.get(name);
+    public Storage get(String name) {
+        Storage rs = feignService.get(name);
         return rs;
     }
 }

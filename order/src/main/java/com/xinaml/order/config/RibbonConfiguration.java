@@ -1,7 +1,7 @@
-package com.xinaml.storage.config;
+package com.xinaml.order.config;
 
+import com.netflix.loadbalancer.BestAvailableRule;
 import com.netflix.loadbalancer.IRule;
-import com.netflix.loadbalancer.RandomRule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,9 +15,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RibbonConfiguration {
     @Bean
-    public IRule ribbonRule() {
-        // new BestAvailableRule() 最大可用策略
-        //随机轮询
-        return new RandomRule();
+    public IRule ribbonRule(){
+        // new RandomRule() 随机轮询
+        //最大可用策略
+        return new BestAvailableRule();
     }
 }
