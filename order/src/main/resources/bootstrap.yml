@@ -2,6 +2,16 @@
 spring:
   application:
     name: order
+#远程配置
+  cloud:
+    config:
+      uri: http://config:9000
+      label: master
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config
+
 
 #端口
 server:
@@ -29,3 +39,4 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000
+foo: abc

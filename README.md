@@ -21,6 +21,22 @@ DOC:
         
         2.gateway
         
-        3.其他服务
+        3.config  
+           
+        4.其他服务
         
         （服务注册到eureka默认需要30秒）
+        
+端口说明：   
+
+           eureka（服务治理）:8761
+           
+           config（远程配置中心）：9000 
+           
+           geteway（网关）8088
+           
+           order （订单模块）8082
+           
+           storage （存储模块）8081
+           
+               

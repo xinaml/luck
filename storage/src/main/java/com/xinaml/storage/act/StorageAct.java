@@ -3,6 +3,7 @@ package com.xinaml.storage.act;
 import com.xinaml.storage.entity.Storage;
 import com.xinaml.storage.ser.StorageSer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +34,16 @@ public class StorageAct {
             e.printStackTrace();
         }
         return "timeout";
+    }
+
+    /**
+     * 读取远程配置
+     */
+    @Value("${foo}")
+    private String foo;
+
+    @RequestMapping("/foo")
+    public String from() {
+        return this.foo;
     }
 }

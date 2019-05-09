@@ -1,9 +1,12 @@
 package com.xinaml.order.act;
 
-import com.xinaml.order.ser.StorageService;
 import com.xinaml.order.entity.Storage;
+import com.xinaml.order.ser.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
+@RefreshScope
 @RestController
 public class OrderAct {
     @Autowired
@@ -20,6 +24,7 @@ public class OrderAct {
 
     /**
      * 远程调用
+     *
      * @param name
      * @return
      */
@@ -30,12 +35,23 @@ public class OrderAct {
     }
 
     /**
-     * 超时测试
+     * 超时测试(断路器)
+     *
      * @return
      */
     @GetMapping("timeout")
     public String timeout() {
         String rs = storageService.timeout();
         return rs;
+    }
+
+    /**
+     * 测试读取远程配置
+     */
+    @Value("${foo}")
+    private String foo;
+    @RequestMapping("/foo")
+    public String from() {
+        return this.foo;
     }
 }
