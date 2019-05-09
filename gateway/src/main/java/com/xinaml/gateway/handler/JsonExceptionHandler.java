@@ -103,7 +103,7 @@ public class JsonExceptionHandler implements ErrorWebExceptionHandler {
         }
         Result rs = new Result();
         rs.setMsg(body);
-        rs.setCode(-1);
+        rs.setCode(httpStatus.value());
         /**
          * 封装响应体,此body可修改为自己的jsonBody
          */

@@ -1,6 +1,7 @@
 package com.xinaml.gateway.filter;
 
 import com.xinaml.gateway.result.Result;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,7 @@ public class FallbackController {
     @GetMapping("fallback")
     public Result fallback() {
         Result result = new Result();
-        result.setCode(-2);
+        result.setCode(HttpStatus.GATEWAY_TIMEOUT.value());
         result.setMsg("服务暂时不可用!");
         return result;
     }
