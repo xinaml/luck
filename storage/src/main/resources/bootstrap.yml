@@ -38,3 +38,10 @@ hystrix:
           thread:
             timeoutInMilliseconds: 3000
 foo : abc
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        http://localhost:8081/actuator/refresh 手动刷新配置，自动刷新暂时不做

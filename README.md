@@ -27,7 +27,7 @@ DOC:
         
         （服务注册到eureka默认需要30秒）
         
-端口说明：   
+模块及端口说明：   
 
            eureka（服务治理）:8761
            
@@ -39,4 +39,9 @@ DOC:
            
            storage （存储模块）8081
            
-               
+           jpa （持久化模块依赖）
+           
+           parent (功能模块父依赖)
+           
+ 手动刷新远程配置：
+    localhost:8081/actuator/refresh              
