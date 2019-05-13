@@ -15,5 +15,13 @@
     <name>order</name>
     <description>订单</description>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.xinaml</groupId>
+            <artifactId>jpa</artifactId>
+            <version>${luck.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

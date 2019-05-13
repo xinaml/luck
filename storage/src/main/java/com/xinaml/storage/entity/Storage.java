@@ -1,5 +1,11 @@
 package com.xinaml.storage.entity;
 
+import com.xinaml.jpa.entity.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * @Author: [lgq]
  * @Date: [19-5-7 上午9:39]
@@ -7,18 +13,21 @@ package com.xinaml.storage.entity;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public class Storage {
-    private String port;
-    private int count ;
+@Entity
+@Table(name = "st_storage")
+public class Storage extends BaseEntity {
+    @Column(columnDefinition = " TINYINT COMMENT '库存'")
+    private Integer count ;
+    @Column(columnDefinition = "VARCHAR(56) COMMENT '单价' ")
     private Double price;
+    @Column(columnDefinition = "VARCHAR(56) COMMENT '产品名' ")
     private String name;
 
-
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
@@ -38,11 +47,4 @@ public class Storage {
         this.name = name;
     }
 
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
 }

@@ -1,6 +1,6 @@
 package com.xinaml.order.ser;
 
-import com.xinaml.order.entity.Storage;
+import com.xinaml.order.vo.StorageVO;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StorageFallBack implements StorageService {
     @Override
-    public Storage get(String name) {
+    public StorageVO get(String name) {
         return null;
     }
 

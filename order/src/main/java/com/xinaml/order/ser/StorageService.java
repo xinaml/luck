@@ -1,6 +1,6 @@
 package com.xinaml.order.ser;
 
-import com.xinaml.order.entity.Storage;
+import com.xinaml.order.vo.StorageVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface StorageService {
     //服务中方法的映射路径
     @GetMapping("get")
-    Storage get(@RequestParam("name") String name);
+    StorageVO get(@RequestParam("name") String name);
 
     //服务中方法的映射路径
     @GetMapping("timeout")

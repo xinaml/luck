@@ -1,4 +1,4 @@
-package com.xinaml.order.entity;
+package com.xinaml.order.vo;
 
 /**
  * @Author: [lgq]
@@ -7,7 +7,7 @@ package com.xinaml.order.entity;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public class Storage {
+public class StorageVO {
     private String id;
     private int count ;
     private Double price;

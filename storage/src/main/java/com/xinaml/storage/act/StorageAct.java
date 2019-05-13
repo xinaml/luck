@@ -24,15 +24,20 @@ public class StorageAct {
 
     @GetMapping("get")
     public Storage get(String name) {
-        return storageSer.get(name);
+        return storageSer.findAll().get(0);
+    }
+
+    @GetMapping("save")
+    public Storage save(Storage storage) {
+        return storageSer.save(storage);
     }
 
     @RequestMapping("timeout")
-    public String timeout(){
-        try{
+    public String timeout() {
+        try {
             //睡2秒，网关Hystrix3秒超时，会触发熔断降级操作
             Thread.sleep(2000);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "timeout";

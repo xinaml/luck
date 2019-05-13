@@ -1,4 +1,4 @@
-package com.xinaml.order.config;
+package com.xinaml.storage.config;
 
 import feign.Retryer;
 import org.springframework.context.annotation.Bean;

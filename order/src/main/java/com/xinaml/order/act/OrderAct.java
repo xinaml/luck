@@ -1,6 +1,6 @@
 package com.xinaml.order.act;
 
-import com.xinaml.order.entity.Storage;
+import com.xinaml.order.vo.StorageVO;
 import com.xinaml.order.ser.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,8 +29,8 @@ public class OrderAct {
      * @return
      */
     @GetMapping("get")
-    public Storage get(String name) {
-        Storage rs = storageService.get(name);
+    public StorageVO get(String name) {
+        StorageVO rs = storageService.get(name);
         return rs;
     }
 
