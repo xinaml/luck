@@ -1,4 +1,4 @@
-package com.xinaml.storage;
+package com.xinaml.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,13 +14,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableFeignClients
 @EnableTransactionManagement //开启事务
-@ComponentScan(basePackages = {"com.xinaml.storage"}) //spring 扫描
-@EnableJpaRepositories(basePackages = {"com.xinaml.storage.rep"}) //持久化接口
-@EntityScan(basePackages = {"com.xinaml.storage.entity"}, basePackageClasses = Jsr310JpaConverters.class)//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
-public class StorageApplication {
+@ComponentScan(basePackages = {"com.xinaml.user"}) //spring 扫描
+@EnableJpaRepositories(basePackages = {"com.xinaml.user.rep"}) //持久化接口
+@EntityScan(basePackages = {"com.xinaml.user.entity"}, basePackageClasses = Jsr310JpaConverters.class)//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
+public class UserApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StorageApplication.class, args);
+        SpringApplication.run(UserApplication.class, args);
     }
 
 }

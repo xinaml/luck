@@ -99,6 +99,10 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
 
     }
 
+    default BE save(BE be) throws SerException {
+        return null;
+    }
+
     /**
      * 通过id删除对象
      *

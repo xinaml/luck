@@ -17,6 +17,7 @@
 
     <properties>
         <luck.version>1.0</luck.version>
+        <druid.version>1.1.9</druid.version>
         <fastjson.version>1.2.47</fastjson.version>
         <lang3.version>3.9</lang3.version>
     </properties>
@@ -42,7 +43,7 @@
         </dependency><dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.9</version>
+            <version>${druid.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -51,7 +52,5 @@
         </dependency>
 
     </dependencies>
-
-
 
 </project>

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "od_order")
+@Table(name = "lk_order")
 public class Order extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(56) COMMENT '订单编号' ")
     private String code;

@@ -19,10 +19,14 @@
     <dependencies>
         <dependency>
             <groupId>com.xinaml</groupId>
+            <artifactId>common</artifactId>
+            <version>${luck.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xinaml</groupId>
             <artifactId>jpa</artifactId>
             <version>${luck.version}</version>
         </dependency>
     </dependencies>
-
 
 </project>

@@ -10,11 +10,12 @@
     </parent>
 
     <groupId>com.xinaml</groupId>
-    <artifactId>order</artifactId>
+    <artifactId>user</artifactId>
     <version>${luck.version}</version>
-    <name>order</name>
-    <description>订单</description>
+    <name>user</name>
+    <description>仓储</description>
     <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>com.xinaml</groupId>

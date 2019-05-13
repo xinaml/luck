@@ -3,7 +3,6 @@ package com.xinaml.storage.config;
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author: [lgq]
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Configuration
 public class RibbonConf {
     @Bean
     public IRule ribbonRule() {

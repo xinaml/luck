@@ -14,11 +14,11 @@ import javax.persistence.Table;
  * @Copy: [com.xinaml]
  */
 @Entity
-@Table(name = "st_storage")
+@Table(name = "lk_storage")
 public class Storage extends BaseEntity {
     @Column(columnDefinition = " TINYINT COMMENT '库存'")
     private Integer count ;
-    @Column(columnDefinition = "VARCHAR(56) COMMENT '单价' ")
+    @Column(columnDefinition = "DECIMAL(10,2) COMMENT '单价' ")
     private Double price;
     @Column(columnDefinition = "VARCHAR(56) COMMENT '产品名' ")
     private String name;

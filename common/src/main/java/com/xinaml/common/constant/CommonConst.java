@@ -1,4 +1,4 @@
-package com.xinaml.jpa.constant;
+package com.xinaml.common.constant;
 
 /**
  * 常用常量类

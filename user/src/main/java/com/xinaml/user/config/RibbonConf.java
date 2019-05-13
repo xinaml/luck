@@ -1,4 +1,4 @@
-package com.xinaml.order.config;
+package com.xinaml.user.config;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;

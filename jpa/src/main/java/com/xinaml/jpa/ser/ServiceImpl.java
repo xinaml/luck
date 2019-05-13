@@ -131,6 +131,15 @@ public class ServiceImpl<BE extends BaseEntity, BD extends BaseDTO> implements S
     }
 
     @Override
+    public BE save(BE be) throws SerException {
+        try {
+            return rep.save(be);
+        } catch (Exception e) {
+            throw repExceptionHandler(new RepException(e.getCause()));
+        }
+    }
+
+    @Override
     public void remove(String... ids) throws SerException {
 
         if (null != ids && ids.length > 0) {

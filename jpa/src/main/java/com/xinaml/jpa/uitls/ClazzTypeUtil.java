@@ -1,6 +1,5 @@
 package com.xinaml.jpa.uitls;
 
-import com.xinaml.jpa.constant.CommonConst;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
@@ -17,9 +16,9 @@ import java.time.format.DateTimeFormatter;
  * @date 2018/4/15
  **/
 public final class ClazzTypeUtil {
-    private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern(CommonConst.DATETIME);
-    private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern(CommonConst.TIME);
-    private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern(CommonConst.DATE);
+    private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final Class[] PRIMITIVES = new Class[]{
             String.class,
             Integer.class,

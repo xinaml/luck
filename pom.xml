@@ -12,11 +12,13 @@
 
     <!--导入模块-->
     <modules>
+        <module>common</module>
         <module>jpa</module>
         <module>eureka</module>
         <module>gateway</module>
         <module>storage</module>
         <module>order</module>
+        <module>user</module>
     </modules>
 
 </project>

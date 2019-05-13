@@ -1,4 +1,4 @@
-package com.xinaml.storage.dto;
+package com.xinaml.user.dto;
 
 import com.xinaml.jpa.dto.BaseDTO;
 
@@ -7,7 +7,7 @@ import com.xinaml.jpa.dto.BaseDTO;
  * @Date: [19-5-13 上午10:32]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.xinaml]
+ * @Copy: [com.xianml]
  */
-public class StorageDTO extends BaseDTO {
+public class UserDTO extends BaseDTO {
 }

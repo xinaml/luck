@@ -1,4 +1,4 @@
-package com.xinaml.storage.config;
+package com.xinaml.user.config;
 
 import feign.Retryer;
 import org.springframework.context.annotation.Bean;
