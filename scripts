@@ -1,1 +1,2 @@
-mvn clean package -Dmaven.test.skip=true
+清理包：mvn clean -Dmaven.test.skip=true
+打包：mvn clean package -Dmaven.test.skip=true

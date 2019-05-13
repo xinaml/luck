@@ -41,7 +41,9 @@ DOC:
            
            jpa （持久化模块依赖）
            
+           common （通用模块依赖）
+           
            parent (功能模块父依赖)
            
  手动刷新远程配置：
-    localhost:8081/actuator/refresh              
+    localhost:8081/actuator/refresh    :post          
