@@ -10,15 +10,10 @@ spring:
     open-in-view: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
   datasource:
-    druid:
-      username: root
-      password: root
-      url: jdbc:mysql://localhost:3306/luck?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&autoReconnect=true&useSSL=false
-      driver-class-name: com.mysql.jdbc.Driver
-      initial-size: 5
-      max-active: 20
-      min-idle: 5
-      max-wait: 2000
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/luck?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&autoReconnect=true&useSSL=false
+
 #远程配置
   cloud:
     config:
@@ -28,6 +23,9 @@ spring:
       discovery:
         enabled: true
         service-id: config
+    alibaba:
+      seata:
+        tx-service-group: tx_group
   http:
     encoding:
       charset: utf-8

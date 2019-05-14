@@ -17,7 +17,8 @@ public class Order extends BaseEntity {
     private Double price;
     @Column(columnDefinition = " TINYINT COMMENT '购买数量'")
     private Integer count;
-
+    @Column(name = "user_id", nullable = false, length = 36)
+    private String userId;
 
     public String getCode() {
         return code;
@@ -49,5 +50,13 @@ public class Order extends BaseEntity {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

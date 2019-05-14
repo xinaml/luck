@@ -1,5 +1,6 @@
 package com.xinaml.user.ser;
 
+import com.xinaml.jpa.dto.RT;
 import com.xinaml.jpa.ser.ServiceImpl;
 import com.xinaml.user.dto.UserDTO;
 import com.xinaml.user.entity.User;
@@ -31,5 +32,15 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
     public User save(User user) {
         user.setCreateDate(LocalDateTime.now());
         return super.save(user);
+    }
+
+    @Override
+    public Boolean subtract(String userId, Double account) {
+        UserDTO dto = new UserDTO();
+        dto.addRT(RT.eq("id",userId));
+        User user = findOne(dto);
+        user.setAccount(user.getAccount()-account);
+        super.save(user);
+        return true;
     }
 }

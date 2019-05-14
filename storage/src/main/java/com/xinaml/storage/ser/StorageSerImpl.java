@@ -1,6 +1,7 @@
 package com.xinaml.storage.ser;
 
 import com.xinaml.jpa.dto.BaseDTO;
+import com.xinaml.jpa.dto.RT;
 import com.xinaml.jpa.ser.ServiceImpl;
 import com.xinaml.storage.dto.StorageDTO;
 import com.xinaml.storage.entity.Storage;
@@ -39,5 +40,14 @@ public class StorageSerImpl extends ServiceImpl<Storage,StorageDTO> implements S
     public Storage save(Storage storage) {
         storage.setCreateDate(LocalDateTime.now());
         return storageRep.save(storage);
+    }
+
+    @Override
+    public void subtract(String name, Integer count) {
+        StorageDTO dto = new StorageDTO();
+        dto.addRT(RT.eq("name",name));
+        Storage storage = findOne(dto);
+        storage.setCount(storage.getCount()-1);
+        super.save(storage);
     }
 }

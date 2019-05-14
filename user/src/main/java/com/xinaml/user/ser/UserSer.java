@@ -19,4 +19,8 @@ public interface UserSer extends Ser<User, UserDTO> {
     default User save(User user) {
         return null;
     }
+
+    default Boolean subtract(String userId,Double account) {
+        return null;
+    }
 }

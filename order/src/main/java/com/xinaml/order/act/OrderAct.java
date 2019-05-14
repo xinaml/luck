@@ -1,7 +1,7 @@
 package com.xinaml.order.act;
 
 import com.xinaml.order.vo.StorageVO;
-import com.xinaml.order.ser.StorageService;
+import com.xinaml.order.feign.StorageFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderAct {
     @Autowired
-    private StorageService storageService;
+    private StorageFeign storageService;
 
     /**
      * 远程调用

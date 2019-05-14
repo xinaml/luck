@@ -1,4 +1,4 @@
-package com.xinaml.order.ser;
+package com.xinaml.order.feign;
 
 import com.xinaml.order.vo.StorageVO;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @Copy: [com.xinaml]
  */
 @Component
-public class StorageFallBack implements StorageService {
+public class UserFallBack implements UserFeign {
     @Override
     public StorageVO get(String name) {
         return null;
@@ -19,6 +19,11 @@ public class StorageFallBack implements StorageService {
 
     @Override
     public String timeout() {
-        return "服务超时！";
+        return null;
+    }
+
+    @Override
+    public Boolean subtract(String userId, Double account) {
+        return false;
     }
 }
