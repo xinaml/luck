@@ -41,7 +41,7 @@ public class StorageSerImpl extends ServiceImpl<Storage,StorageDTO> implements S
         storage.setCreateDate(LocalDateTime.now());
         return storageRep.save(storage);
     }
-
+    @Transactional
     @Override
     public void subtract(String name, Integer count) {
         StorageDTO dto = new StorageDTO();

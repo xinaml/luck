@@ -44,5 +44,8 @@ public class BusinessSer {
         order.setName(name);
         order.setUserId(userId);
         orderSer.save(order);
+        if(userId.equals("2")){
+            throw new RuntimeException("下单失败！");
+        }
     }
 }
