@@ -5,9 +5,9 @@
 **/classes/
 **/gradle/
 **/project/
-**/.sass-cache/
 **/.idea/
 **/*.iml
+*.iml
 .idea/
 .gradle/
 settings.gradle
