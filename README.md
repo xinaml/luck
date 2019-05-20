@@ -4,16 +4,19 @@ IDE: idea
 
 JDK: 1.8.0_171
 
+Maven: 3.5.3
+
 FRAME: 
         
         spring-cloud: Greenwich.SR1
         Spring-boot: 2.1.4.RELEASE
-        Maven: 3.5.3
+        seata : 0.5.1
+        
         
 DOC:
     https://cloud.spring.io/spring-cloud-static/Greenwich.RELEASE/single/spring-cloud.html
     
-    
+分布式事务（seata）：https://github.com/seata/seata/releases    
     
 启动顺序：
 
