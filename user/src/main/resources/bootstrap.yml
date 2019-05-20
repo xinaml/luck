@@ -24,7 +24,7 @@ spring:
         service-id: config
     alibaba:
       seata:
-        tx-service-group: tx_group
+        tx-service-group: my_test_tx_group
   http:
     encoding:
       charset: utf-8

@@ -3,6 +3,7 @@ package com.xinaml.order.ser;
 import com.xinaml.order.entity.Order;
 import com.xinaml.order.feign.StorageFeign;
 import com.xinaml.order.feign.UserFeign;
+import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,15 @@ public class BusinessSer {
      * @param name
      * @param count
      */
+
     @GlobalTransactional
     public void purchase(String userId, String name, int count,Double price) {
+        String xid = RootContext.getXID();
         storageFeign.subtract(name, count);//减去库存
         userFeign.subtract(userId, price);//减去用户存款
+        if(userId.equals("2")){
+            throw new RuntimeException("下单失败！");
+        }
         //生成订单
         Order order = new Order();
         order.setCreateDate(LocalDateTime.now());
@@ -44,8 +50,6 @@ public class BusinessSer {
         order.setName(name);
         order.setUserId(userId);
         orderSer.save(order);
-        if(userId.equals("2")){
-            throw new RuntimeException("下单失败！");
-        }
+
     }
 }
