@@ -12,12 +12,21 @@
 
     <!--导入模块-->
     <modules>
+        <!--通用依赖-->
         <module>common</module>
+        <!--jpa模块-->
         <module>jpa</module>
+        <!--远程配置-->
+        <module>config</module>
+        <!--服务治理-->
         <module>eureka</module>
+        <!--服务网关-->
         <module>gateway</module>
+        <!--仓储模块-->
         <module>storage</module>
+        <!--订单模块-->
         <module>order</module>
+        <!--用户模块-->
         <module>user</module>
     </modules>
 
