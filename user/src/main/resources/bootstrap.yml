@@ -15,13 +15,6 @@ spring:
     url: jdbc:mysql://localhost:3306/luck?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&autoReconnect=true&useSSL=false
 #远程配置
   cloud:
-    config:
-      uri: http://config:9000
-      label: master
-      profile: dev
-      discovery:
-        enabled: true
-        service-id: config
     alibaba:
       seata:
         tx-service-group: my_test_tx_group

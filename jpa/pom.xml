@@ -21,6 +21,7 @@
         <fastjson.version>1.2.47</fastjson.version>
         <lang3.version>3.9</lang3.version>
         <seata.version>0.5.1</seata.version>
+        <colud-seata.version>0.9.1.BUILD-SNAPSHOT</colud-seata.version>
     </properties>
 
     <dependencies>
@@ -44,7 +45,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-alibaba-seata</artifactId>
-            <version>0.9.1.BUILD-SNAPSHOT</version>
+            <version>${colud-seata.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>io.seata</groupId>

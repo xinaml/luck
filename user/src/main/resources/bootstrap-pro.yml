@@ -1,7 +1,8 @@
+#正式打包配置
 #服务名
 spring:
   application:
-    name: storage
+    name: user
   jpa:
     database: mysql
     show-sql: true
@@ -15,6 +16,13 @@ spring:
     url: jdbc:mysql://localhost:3306/luck?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&autoReconnect=true&useSSL=false
 #远程配置
   cloud:
+    config:
+      uri: http://config:9000
+      label: master
+      profile: pro
+      discovery:
+        enabled: true
+        service-id: config
     alibaba:
       seata:
         tx-service-group: my_test_tx_group
@@ -25,7 +33,7 @@ spring:
       enabled: true
 #端口
 server:
-  port: 8081
+  port: 8083
   tomcat:
     uri-encoding: UTF-8
 
@@ -57,5 +65,3 @@ management:
       exposure:
         include: "*"
 #        http://localhost:8081/actuator/refresh 手动刷新配置，自动刷新暂时不做
-
-foo : abc
