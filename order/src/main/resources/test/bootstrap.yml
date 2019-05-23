@@ -1,8 +1,8 @@
-#开发环境配置
+#测试打包配置
 #服务名
 spring:
   application:
-    name: storage
+    name: order
   jpa:
     database: mysql
     show-sql: true
@@ -14,8 +14,16 @@ spring:
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/luck?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8&autoReconnect=true&useSSL=false
+
 #远程配置
   cloud:
+    config:
+      uri: http://config:9000
+      label: master
+      profile: pro
+      discovery:
+        enabled: true
+        service-id: config
     alibaba:
       seata:
         tx-service-group: my_test_tx_group
@@ -24,9 +32,11 @@ spring:
       charset: utf-8
       force: true
       enabled: true
+
+
 #端口
 server:
-  port: 8081
+  port: 8082
   tomcat:
     uri-encoding: UTF-8
 
@@ -44,6 +54,7 @@ feign:
 ribbon:
   ReadTimeout: 3000
   ConnectTimeout: 200
+
 hystrix:
   command:
     default:
@@ -57,6 +68,5 @@ management:
     web:
       exposure:
         include: "*"
-#        http://localhost:8081/actuator/refresh 手动刷新配置，自动刷新暂时不做
-
+#        http://localhost:8082/actuator/refresh 手动刷新配置，自动刷新暂时不做
 foo : abc

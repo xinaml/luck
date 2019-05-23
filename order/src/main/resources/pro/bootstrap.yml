@@ -1,10 +1,8 @@
-#正式打包配置
+#正式环境配置
 #服务名
 spring:
   application:
     name: order
-  profiles:
-    active: '@spring.profiles.active@'
   jpa:
     database: mysql
     show-sql: true

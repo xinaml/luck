@@ -40,30 +40,16 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
 
     <profiles>
-        <!-- 开发环境 -->
+        <!-- 测试环境 -->
         <profile>
-            <id>dev</id>
+            <id>test</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
+                <spring.profiles.active>test</spring.profiles.active>
             </properties>
         </profile>
 
@@ -76,9 +62,41 @@
             <properties>
                 <spring.profiles.active>pro</spring.profiles.active>
             </properties>
+
         </profile>
 
     </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <!--项目的默认资源目录，但是要排除不必要的文件，想要指定加入的再下面的resource指定-->
+                <directory>${project.basedir}/src/main/resources</directory>
+                <excludes>
+                    <exclude>pro/*</exclude>
+                    <exclude>test/*</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources/${spring.profiles.active}</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/java</directory>
+                <!--是否替换资源中的属性-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
 
 
 </project>

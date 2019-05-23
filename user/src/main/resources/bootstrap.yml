@@ -1,9 +1,8 @@
+#开发环境配置
 #服务名
 spring:
   application:
     name: user
-  profiles:
-    active: '@spring.profiles.active@'
   jpa:
     database: mysql
     show-sql: true
