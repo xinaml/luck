@@ -1,3 +1,4 @@
+#正式打包配置
 #服务名
 spring:
   application:

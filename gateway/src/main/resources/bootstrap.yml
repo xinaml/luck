@@ -11,6 +11,8 @@ eureka:
 spring:
   application:
     name: gateway
+  profiles:
+    active: '@spring.profiles.active@'
   redis:
     host: localhost
     password: root

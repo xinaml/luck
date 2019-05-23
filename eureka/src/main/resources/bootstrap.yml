@@ -2,7 +2,8 @@
 spring:
   application:
     name: eureka-server
-
+  profiles:
+    active: '@spring.profiles.active@'
 #端口
 server:
   port: 8761

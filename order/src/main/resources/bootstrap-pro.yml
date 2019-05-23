@@ -3,6 +3,8 @@
 spring:
   application:
     name: order
+  profiles:
+    active: '@spring.profiles.active@'
   jpa:
     database: mysql
     show-sql: true

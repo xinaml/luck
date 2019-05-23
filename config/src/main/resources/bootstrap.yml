@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: config
+  profiles:
+    active: '@spring.profiles.active@'
   cloud:
    config:
     server:
