@@ -42,6 +42,14 @@ spring:
           args:
             name: fallbackcmd
             fallbackUri: forward:/fallback
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 1 #允许用户每秒处理多少个请求
+            redis-rate-limiter.burstCapacity: 20 #允许在一秒钟内完成的最大请求数
+            key-resolver: "#{@ipKeyResolver}"
+
+
+
 
 
 # hystrix 信号量隔离，3秒后自动超时

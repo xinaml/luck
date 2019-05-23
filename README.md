@@ -17,16 +17,20 @@ DOC:
     https://cloud.spring.io/spring-cloud-static/Greenwich.RELEASE/single/spring-cloud.html
     
 分布式事务（seata）：https://github.com/seata/seata/releases    
+
+
     
 启动顺序：
+        
+        1.seata-server(请下载0.51版本)
 
-        1.eureka
+        2.eureka
         
-        2.gateway
+        3.gateway
         
-        3.config  
+        4.config  
            
-        4.其他服务
+        5.其他服务
         
         （服务注册到eureka默认需要30秒）
         
