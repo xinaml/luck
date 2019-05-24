@@ -24,7 +24,8 @@ public class StorageAct {
 
     @GetMapping("get")
     public Storage get(String name) {
-        return storageSer.findAll().get(0);
+        Storage storage =  storageSer.findAll().get(0);
+        return storage;
     }
 
     @GetMapping("save")

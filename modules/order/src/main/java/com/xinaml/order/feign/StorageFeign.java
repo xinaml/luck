@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@FeignClient(value = "storage", fallback = StorageFallBack.class)
+@FeignClient(value = "storage")
 public interface StorageFeign {
     //服务中方法的映射路径
     @GetMapping("get")

@@ -1,5 +1,7 @@
 package com.xinaml.order.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @Author: [lgq]
  * @Date: [19-5-7 上午9:39]
@@ -7,6 +9,7 @@ package com.xinaml.order.vo;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StorageVO {
     private String id;
     private int count ;
