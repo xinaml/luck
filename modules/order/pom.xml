@@ -6,16 +6,15 @@
         <groupId>com.xinaml</groupId>
         <artifactId>parent</artifactId>
         <version>1.0</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <relativePath>../../parent/pom.xml</relativePath>
     </parent>
 
     <groupId>com.xinaml</groupId>
-    <artifactId>user</artifactId>
+    <artifactId>order</artifactId>
     <version>${luck.version}</version>
-    <name>user</name>
-    <description>仓储</description>
+    <name>order</name>
+    <description>订单</description>
     <packaging>jar</packaging>
-
     <dependencies>
         <dependency>
             <groupId>com.xinaml</groupId>
