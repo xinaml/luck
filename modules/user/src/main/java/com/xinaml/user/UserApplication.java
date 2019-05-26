@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableFeignClients
 @EnableTransactionManagement //开启事务
-@ComponentScan(basePackages = {"com.xinaml.user"}) //spring 扫描
 @EnableJpaRepositories(basePackages = {"com.xinaml.user.rep"}) //持久化接口
 @EntityScan(basePackages = {"com.xinaml.user.entity"}, basePackageClasses = Jsr310JpaConverters.class)//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
 public class UserApplication {
