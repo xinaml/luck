@@ -1,6 +1,6 @@
 #luck
 
-IDE: idea
+IDE: idea 2019.1.2
 
 JDK: 1.8.0_171
 
@@ -58,4 +58,22 @@ DOC:
              user （用户模块） 8083
            
  手动刷新远程配置：
-    localhost:8081/actuator/refresh    :post          
+    localhost:8081/actuator/refresh    :post  
+    
+    
+    
+  maven 仓库setting.xml配置(加速)：
+    <mirrors>
+            <mirror>
+                <id>default</id>
+                <mirrorOf>repositoryId</mirrorOf>
+                <name>default Mirror</name>
+                <url>http://my.repository.com/repo/path</url>
+            </mirror>
+            <mirror>
+                <id>nexus-aliyun</id>
+                <mirrorOf>aliyun</mirrorOf>
+                <name>aliyun maven</name>
+                <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            </mirror>
+        </mirrors>          
