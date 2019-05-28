@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Service
 public class BusinessSer {
 
-    @Autowired
+    @Autowired(required = false)
     private StorageFeign storageFeign;
     @Autowired
     private UserFeign userFeign;

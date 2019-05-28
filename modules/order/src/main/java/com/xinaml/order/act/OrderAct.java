@@ -19,8 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RestController
 public class OrderAct {
-    @Autowired
-    private StorageFeign storageService;
+    @Autowired(required = false)
+    private StorageFeign storageFeign;
+
+    /**
+     * 负载均衡测试
+     *
+     * @return
+     */
+    @GetMapping("port")
+    public String port() {
+        return storageFeign.port();
+    }
 
     /**
      * 远程调用
@@ -30,7 +40,7 @@ public class OrderAct {
      */
     @GetMapping("get")
     public StorageVO get(String name) {
-        StorageVO rs = storageService.get(name);
+        StorageVO rs = storageFeign.get(name);
         return rs;
     }
 
@@ -41,7 +51,7 @@ public class OrderAct {
      */
     @GetMapping("timeout")
     public String timeout() {
-        String rs = storageService.timeout();
+        String rs = storageFeign.timeout();
         return rs;
     }
 

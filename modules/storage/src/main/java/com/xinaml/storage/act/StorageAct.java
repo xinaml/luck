@@ -22,9 +22,19 @@ public class StorageAct {
     @Autowired
     private StorageSer storageSer;
 
+    @Value("${server.port}")
+    private String port;
+
+    @GetMapping("port")
+    public String port() {
+        return port;
+    }
+
+
     @GetMapping("get")
     public Storage get(String name) {
-        Storage storage =  storageSer.findAll().get(0);
+        Storage storage = storageSer.findAll().get(0);
+        storage.setId(port);
         return storage;
     }
 

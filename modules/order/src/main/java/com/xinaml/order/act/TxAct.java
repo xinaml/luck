@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Author: [lgq]
  * @Date: [19-5-14 上午11:40]
- * @Description:
+ * @Description: 事务测试
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */

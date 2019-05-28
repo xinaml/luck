@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @FeignClient(value = "storage")
 public interface StorageFeign {
-    //服务中方法的映射路径
+    //负载均衡测试
+    @GetMapping("port")
+    String port();
+
+    //远程调用测试
     @GetMapping("get")
     StorageVO get(@RequestParam("name") String name);
 
-    //服务中方法的映射路径
+    //超时测试
     @GetMapping("timeout")
     String timeout();
 
