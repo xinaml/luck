@@ -9,7 +9,7 @@ import com.xinaml.order.entity.Order;
  * @Date: [19-5-14 上午11:54]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 public interface OrderSer extends Ser<Order,OrderDTO> {
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @Date: [19-5-14 上午11:54]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 @Service
 public class OrderSerImpl extends ServiceImpl<Order,OrderDTO> implements OrderSer {

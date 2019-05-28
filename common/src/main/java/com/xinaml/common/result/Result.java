@@ -1,4 +1,4 @@
-package com.xinaml.gateway.result;
+package com.xinaml.common.result;
 
 /**
  * @Author: [lgq]

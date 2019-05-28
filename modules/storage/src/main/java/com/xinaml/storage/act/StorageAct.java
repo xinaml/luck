@@ -37,7 +37,7 @@ public class StorageAct {
     public String timeout() {
         try {
             //睡2秒，网关Hystrix3秒超时，会触发熔断降级操作
-            Thread.sleep(2000);
+            Thread.sleep(3500);
         } catch (Exception e) {
             e.printStackTrace();
         }

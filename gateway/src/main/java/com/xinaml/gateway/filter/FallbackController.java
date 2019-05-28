@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: [19-5-6 下午2:31]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 @RestController
 public class FallbackController {
