@@ -1,20 +1,73 @@
-#正式环境配置
+#开发环境配置
+#端口
+server:
+  port: 8088
+#注册到服务治理
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
 #服务名
 spring:
   application:
-    name: eureka-server
+    name: gateway
+  redis:
+    host: localhost
+    password: root
+    port: 6379
+#路由
+  cloud:
+    gateway:
+      routes:
+      - id: order
+        uri: lb://order:8082
+        predicates:
+        - Path=/order/**
+        filters:
+#        - Retry=3 //路由重试
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 1 #允许用户每秒处理多少个请求（令牌桶每秒填充平均速率）
+            redis-rate-limiter.burstCapacity: 1 #允许在一秒钟内完成的最大请求数（令牌桶容量）
+            key-resolver: "#{@ipKeyResolver}"
+      - id: storage
+        uri: lb://storage:8081
+        predicates:
+        - Path=/storage/**
+        filters:
+#        - Retry=3 //路由重试
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 1 #允许用户每秒处理多少个请求（令牌桶每秒填充平均速率）
+            redis-rate-limiter.burstCapacity: 1 #允许在一秒钟内完成的最大请求数（令牌桶容量）
+            key-resolver: "#{@ipKeyResolver}"
 
-#端口
-server:
-  port: 8761
 
-eureka:
-  client:
-    #指定服务注册中心的位置
-    service-url:
-      defaultZone: http://localhost:${server.port}/eureka/
-    #是否向服务注册中心注册自己
-    register-with-eureka: false
-    #是否检索服务
-    fetch-registry: false
+
+
+
+# hystrix 信号量隔离，3秒后自动超时
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 3
+
 

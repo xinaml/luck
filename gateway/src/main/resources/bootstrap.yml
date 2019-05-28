@@ -65,7 +65,9 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000
-
-
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 3
 
 
