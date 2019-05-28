@@ -2,6 +2,7 @@ package com.xinaml.user.config;
 
 import feign.Retryer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author: [lgq]
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
+@Configuration
 public class FeignConf {
     @Bean
     public Retryer feignRetryer() {
