@@ -76,4 +76,7 @@ DOC:
                 <name>aliyun maven</name>
                 <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
             </mirror>
-    </mirrors>          
+    </mirrors>    
+    
+    
+ @HystrixCommand：涉及远程调用的加该注解         

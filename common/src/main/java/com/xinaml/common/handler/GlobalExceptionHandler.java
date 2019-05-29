@@ -1,6 +1,7 @@
 package com.xinaml.common.handler;
 
 import com.netflix.hystrix.exception.HystrixRuntimeException;
+import com.xinaml.common.constant.MsgConst;
 import com.xinaml.common.result.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
@@ -28,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result handleException(Exception e) {
         e.printStackTrace();
-        return new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(),"服务器异常！");
+        return new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(),MsgConst.SERVER_ERROR);
     }
 
     /**
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
     public Result handleIllegalParamException(MethodArgumentNotValidException e) {
 
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
-        String tips = "参数不合法";
+        String tips = MsgConst.PARAM_ERROR;
         if (errors.size() > 0) {
             tips = errors.get(0).getDefaultMessage();
         }
@@ -58,10 +59,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HystrixRuntimeException.class)
     public Result hystrixRuntimeException(HystrixRuntimeException e) {
         e.printStackTrace();
-        String msg="远程服务调用失败！";
+        String msg=MsgConst.HYSTRIX_ERROR;
         Integer code = HttpStatus.INTERNAL_SERVER_ERROR.value();
         if(e.getMessage().indexOf("timed-out")!=-1){
-            msg="服务暂时不可用！";
+            msg=MsgConst.HYSTRIX_TIMEOUT;
             code =HttpStatus.GATEWAY_TIMEOUT.value();
         }
         Result result = new Result(code,msg);

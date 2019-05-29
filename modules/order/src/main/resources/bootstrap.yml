@@ -43,18 +43,10 @@ eureka:
 feign:
   hystrix:
     enabled: true
-
+#远程调用超时
 ribbon:
   ReadTimeout: 3000
   ConnectTimeout: 200
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000
 
 management:
   endpoints:

@@ -1,5 +1,6 @@
 package com.xinaml.order.act;
 
+import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.order.vo.StorageVO;
 import com.xinaml.order.feign.StorageFeign;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class OrderAct {
      * @param name
      * @return
      */
+    @HystrixCommand
     @GetMapping("get")
     public StorageVO get(String name) {
         StorageVO rs = storageFeign.get(name);
@@ -49,6 +51,7 @@ public class OrderAct {
      *
      * @return
      */
+    @HystrixCommand
     @GetMapping("timeout")
     public String timeout() {
         String rs = storageFeign.timeout();
@@ -60,7 +63,7 @@ public class OrderAct {
      */
     @Value("${foo}")
     private String foo;
-    @RequestMapping("/foo")
+    @GetMapping("/foo")
     public String from() {
         return this.foo;
     }

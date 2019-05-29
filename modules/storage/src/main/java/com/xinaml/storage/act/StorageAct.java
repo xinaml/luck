@@ -43,7 +43,7 @@ public class StorageAct {
         return storageSer.save(storage);
     }
 
-    @RequestMapping("timeout")
+    @GetMapping("timeout")
     public String timeout() {
         try {
             //睡2秒，网关Hystrix3秒超时，会触发熔断降级操作

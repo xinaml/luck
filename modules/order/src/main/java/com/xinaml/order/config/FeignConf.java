@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Author: [lgq]
  * @Date: [19-5-7 下午2:21]
- * @Description:
+ * @Description: 重试
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
