@@ -7,7 +7,6 @@ package com.xinaml.jpa.ser;
 
 import com.xinaml.jpa.dto.BaseDTO;
 import com.xinaml.jpa.entity.BaseEntity;
-import com.xinaml.jpa.exception.SerException;
 
 import java.util.List;
 import java.util.Map;
@@ -23,9 +22,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * 查询所有数据
      *
      * @return
-     * @throws SerException
      */
-    default List<BE> findAll() throws SerException {
+    default List<BE> findAll()  {
         return null;
     }
 
@@ -34,9 +32,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param dto
      * @return
-     * @throws SerException
      */
-    default Map<String,Object> findByPage(BD dto) throws SerException {
+    default Map<String,Object> findByPage(BD dto) {
         return null;
     }
 
@@ -45,9 +42,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param dto
      * @return
-     * @throws SerException
      */
-    default Long count(BD dto) throws SerException {
+    default Long count(BD dto)   {
         return null;
     }
 
@@ -56,9 +52,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param dto
      * @return
-     * @throws SerException
      */
-    default BE findOne(BD dto) throws SerException {
+    default BE findOne(BD dto)   {
         return null;
     }
 
@@ -70,9 +65,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param dto
      * @return
-     * @throws SerException
      */
-    default List<BE> findByRTS(BD dto) throws SerException {
+    default List<BE> findByRTS(BD dto)   {
         return null;
     }
 
@@ -82,9 +76,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param id
      * @return
-     * @throws SerException
      */
-    default BE findById(String id) throws SerException {
+    default BE findById(String id)   {
         return null;
     }
 
@@ -93,13 +86,12 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * 保存对象列表
      *
      * @param entities
-     * @throws SerException
      */
-    default void save(BE... entities) throws SerException {
+    default void save(BE... entities)   {
 
     }
 
-    default BE save(BE be) throws SerException {
+    default BE save(BE be)   {
         return null;
     }
 
@@ -107,9 +99,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * 通过id删除对象
      *
      * @param ids
-     * @throws SerException
      */
-    default void remove(String... ids) throws SerException {
+    default void remove(String... ids)   {
 
     }
 
@@ -118,9 +109,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * 删除对象列表
      *
      * @param entities
-     * @throws SerException
      */
-    default void remove(BE... entities) throws SerException {
+    default void remove(BE... entities)   {
 
     }
 
@@ -129,18 +119,16 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * 更新对象
      *
      * @param entities
-     * @throws SerException
      */
-    default void update(BE... entities) throws SerException {
+    default void update(BE... entities)   {
 
     }
     /**
      * 更新对象
      *
      * @param entities
-     * @throws SerException
      */
-    default void update(List<BE> entities) throws SerException {
+    default void update(List<BE> entities)   {
 
     }
 
@@ -149,9 +137,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param id
      * @return
-     * @throws SerException
      */
-    default Boolean exists(String id) throws SerException {
+    default Boolean exists(String id)   {
         return null;
     }
 
@@ -163,9 +150,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * @param fields 查询的字段
      * @param
      * @return
-     * @throws SerException
      */
-    default <T> List<T> findBySql(String sql, Class clazz, String... fields) throws SerException {
+    default <T> List<T> findBySql(String sql, Class clazz, String... fields)   {
         return null;
     }
 
@@ -176,9 +162,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * @param fields
      * @param <T>
      * @return
-     * @throws SerException
      */
-    default <T> T findOneBySql(String sql, Class clazz, String... fields) throws SerException {
+    default <T> T findOneBySql(String sql, Class clazz, String... fields)   {
         return null;
     }
     /**
@@ -186,9 +171,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      *
      * @param sql sql语句
      * @return
-     * @throws SerException
      */
-    default List<Object> findBySql(String sql) throws SerException {
+    default List<Object> findBySql(String sql)   {
         return null;
     }
 
@@ -197,9 +181,8 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * 执行sql语句
      *
      * @param sql
-     * @throws SerException
      */
-    default void executeSql(String sql) throws SerException {
+    default void executeSql(String sql)   {
     }
 
     /**
@@ -208,7 +191,7 @@ public interface Ser<BE extends BaseEntity, BD extends BaseDTO> {
      * @param clazz
      * @return
      */
-    default String getTableName(Class clazz) throws SerException {
+    default String getTableName(Class clazz)   {
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.xinaml.jpa.uitls;
 
+import com.xinaml.common.constant.CommonConst;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
@@ -16,9 +17,6 @@ import java.time.format.DateTimeFormatter;
  * @date 2018/4/15
  **/
 public final class ClazzTypeUtil {
-    private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private static final DateTimeFormatter DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final Class[] PRIMITIVES = new Class[]{
             String.class,
             Integer.class,
@@ -187,13 +185,13 @@ public final class ClazzTypeUtil {
                     obj = Integer.parseInt(val);
                     break;
                 case "LocalDateTime":
-                    obj = LocalDateTime.parse(StringUtils.substring(val, 0, val.length() - 2), DATE_TIME);
+                    obj = LocalDateTime.parse(StringUtils.substring(val, 0, val.length() - 2),  DateTimeFormatter.ofPattern(CommonConst.DATETIME));
                     break;
                 case "LocalTime":
-                    obj = LocalDateTime.parse(val, TIME);
+                    obj = LocalDateTime.parse(val,  DateTimeFormatter.ofPattern(CommonConst.TIME));
                     break;
                 case "LocalDate":
-                    obj = LocalDate.parse(val, DATE);
+                    obj = LocalDate.parse(val,  DateTimeFormatter.ofPattern(CommonConst.DATE));
                     break;
                 default:
                     obj = String.valueOf(obj);

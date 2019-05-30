@@ -8,7 +8,13 @@ package com.xinaml.common.result;
  * @Copy: [com.xinaml]
  */
 public class Result {
-    private Integer code;
+    /**
+     * 0：正常数据
+     * -1：业务异常
+     * -2：持久化异常
+     * 其他：服务器异常
+     */
+    private Integer code=0;
     private String msg;
     private Object data;
 

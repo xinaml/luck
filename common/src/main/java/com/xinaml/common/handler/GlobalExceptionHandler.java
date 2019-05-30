@@ -2,12 +2,15 @@ package com.xinaml.common.handler;
 
 import com.netflix.hystrix.exception.HystrixRuntimeException;
 import com.xinaml.common.constant.MsgConst;
+import com.xinaml.common.exception.RepException;
+import com.xinaml.common.exception.SerException;
 import com.xinaml.common.result.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.rmi.ServerException;
 import java.util.List;
 
 /**
@@ -33,13 +36,36 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     *
+     * 持久化异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RepException.class)
+    public Result handleException(RepException e) {
+        e.printStackTrace();
+        return new Result(-2,MsgConst.SERVER_ERROR);
+    }
+
+    /**
+     * 业务异常
+     * @param e
+     * @return
+     */
+
+    @ExceptionHandler(SerException.class)
+    public Result handleException(SerException e) {
+        e.printStackTrace();
+        return new Result(-1,e.getMessage());
+    }
+
+    /**
      * 参数异常
      * @param e
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handleIllegalParamException(MethodArgumentNotValidException e) {
-
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         String tips = MsgConst.PARAM_ERROR;
         if (errors.size() > 0) {
@@ -47,7 +73,6 @@ public class GlobalExceptionHandler {
         }
         Result result = new Result(HttpStatus.PAYMENT_REQUIRED.value());
         result.setMsg(tips);
-
         return result;
     }
 

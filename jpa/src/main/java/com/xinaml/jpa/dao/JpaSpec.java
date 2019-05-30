@@ -6,11 +6,11 @@
  **/
 package com.xinaml.jpa.dao;
 
+import com.xinaml.common.exception.SerException;
 import com.xinaml.jpa.dto.BaseDTO;
 import com.xinaml.jpa.dto.Restrict;
 import com.xinaml.jpa.dto.RestrictType;
 import com.xinaml.jpa.entity.BaseEntity;
-import com.xinaml.jpa.exception.RepException;
 import com.xinaml.jpa.uitls.ClazzTypeUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -75,9 +75,8 @@ public class JpaSpec<BE extends BaseEntity, BD extends BaseDTO> implements Speci
      * @param root
      * @param cb
      * @return
-     * @throws RepException
      */
-    private Predicate initPredicates(BD dto, Root<BE> root, CriteriaBuilder cb) throws RepException {
+    private Predicate initPredicates(BD dto, Root<BE> root, CriteriaBuilder cb) throws SerException {
         List<Predicate> preList = new ArrayList<>(0); //条件列表
         List<Restrict> restricts = null;
         if (null != dto) {
@@ -104,7 +103,7 @@ public class JpaSpec<BE extends BaseEntity, BD extends BaseDTO> implements Speci
                                 type.equals(RestrictType.ISNOTNULL)) {
                             clazz = String.class;
                         } else {
-                            throw new RepException(type.name() + "查询:列【" + field + "】值不能为空！");
+                            throw new SerException(type.name() + "查询:列【" + field + "】值不能为空！");
                         }
 
                     }
@@ -187,7 +186,7 @@ public class JpaSpec<BE extends BaseEntity, BD extends BaseDTO> implements Speci
                     }
                 }
             } catch (Exception e) {
-                throw new RepException(e.getCause());
+                throw new SerException(e.getMessage());
 
             }
 

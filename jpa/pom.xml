@@ -18,13 +18,25 @@
     <properties>
         <luck.version>1.0</luck.version>
         <druid.version>1.1.9</druid.version>
-        <fastjson.version>1.2.47</fastjson.version>
         <lang3.version>3.9</lang3.version>
         <seata.version>0.5.1</seata.version>
         <colud-seata.version>0.9.1.BUILD-SNAPSHOT</colud-seata.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.xinaml</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+            <!--禁止依赖传递-->
+            <optional>true</optional>
+        </dependency>
         <!--jpa-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -57,11 +69,6 @@
             <groupId>io.seata</groupId>
             <artifactId>seata-spring</artifactId>
             <version>${seata.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
         <!--连接池-->
         <dependency>

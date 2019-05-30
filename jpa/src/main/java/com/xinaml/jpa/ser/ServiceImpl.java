@@ -7,17 +7,13 @@
 package com.xinaml.jpa.ser;
 
 
+import com.xinaml.common.exception.RepException;
 import com.xinaml.jpa.dao.JapRep;
 import com.xinaml.jpa.dao.JpaSpec;
 import com.xinaml.jpa.dto.BaseDTO;
 import com.xinaml.jpa.entity.BaseEntity;
-import com.xinaml.jpa.exception.RepException;
-import com.xinaml.jpa.exception.SerException;
 import com.xinaml.jpa.uitls.ClazzTypeUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.QueryTimeoutException;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,181 +36,136 @@ public class ServiceImpl<BE extends BaseEntity, BD extends BaseDTO> implements S
 
 
     @Override
-    public List<BE> findAll() throws SerException {
-        try {
-            return rep.findAll();
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
+    public List<BE> findAll() {
+        return rep.findAll();
+    }
+
+    @Override
+    public Map<String, Object> findByPage(BD dto) {
+        JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
+        PageRequest page = jpaSpec.getPageRequest(dto);
+        Page<BE> rs = rep.findAll(jpaSpec, page);
+        Map map = new HashMap<String, Object>(2);
+        map.put("rows", rs.getContent());
+        map.put("total", rs.getTotalElements());
+        return map;
+    }
+
+    @Override
+    public Long count(BD dto) {
+        JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
+        return rep.count(jpaSpec);
+    }
+
+    @Override
+    public BE findOne(BD dto) {
+        JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
+        Optional<BE> op = rep.findOne(jpaSpec);
+        if (op.isPresent()) {
+            return op.get();
+        }
+        return null;
+    }
+
+
+    @Override
+    public List<BE> findByRTS(BD dto) {
+
+        JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
+        if (dto.getSorts().size() > 0) {
+            return rep.findAll(jpaSpec, jpaSpec.getSort(dto.getSorts()));
+        } else {
+            return rep.findAll(jpaSpec);
         }
 
     }
 
     @Override
-    public Map<String, Object> findByPage(BD dto) throws SerException {
-        try {
-            JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
-            PageRequest page = jpaSpec.getPageRequest(dto);
-            Page<BE> rs = rep.findAll(jpaSpec, page);
-            Map map = new HashMap<String, Object>(2);
-            map.put("rows", rs.getContent());
-            map.put("total", rs.getTotalElements());
-            return map;
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-
-    }
-
-    @Override
-    public Long count(BD dto) throws SerException {
-        try {
-            JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
-            return rep.count(jpaSpec);
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-
-    }
-
-    @Override
-    public BE findOne(BD dto) throws SerException {
-        try {
-            JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
-            Optional<BE> op = rep.findOne(jpaSpec);
-            if (op.isPresent()) {
-                return op.get();
-            }
-            return null;
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-    }
-
-
-    @Override
-    public List<BE> findByRTS(BD dto) throws SerException {
-
-        try {
-            JpaSpec jpaSpec = new JpaSpec<BE, BD>(dto);
-            if (dto.getSorts().size() > 0) {
-                return rep.findAll(jpaSpec, jpaSpec.getSort(dto.getSorts()));
-            } else {
-                return rep.findAll(jpaSpec);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-    }
-
-    @Override
-    public BE findById(String id) throws SerException {
+    public BE findById(String id) {
         if (StringUtils.isNotBlank(id)) {
-            try {
-                return rep.findById(id).get();
-            } catch (NoSuchElementException e) {
-                throw new SerException("id为" + id + "的数据不存在！");
+            Optional<BE> optional = rep.findById(id);
+            if (null != optional) {
+                return optional.get();
+            } else {
+                return null;
             }
         } else {
-            throw new SerException("查询 id 不能为空！");
+            throw new RepException("查询 id 不能为空！");
         }
 
     }
 
     @Override
-    public void save(BE... entities) throws SerException {
-        try {
-            rep.saveAll(Arrays.asList(entities));
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
+    public void save(BE... entities) {
+        rep.saveAll(Arrays.asList(entities));
+
     }
 
     @Override
-    public BE save(BE be) throws SerException {
-        try {
-            return rep.save(be);
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
+    public BE save(BE be) {
+        return rep.save(be);
     }
 
     @Override
-    public void remove(String... ids) throws SerException {
+    public void remove(String... ids) {
 
         if (null != ids && ids.length > 0) {
-            try {
-                for (String id : ids) {
-                    rep.deleteById(id);
-                }
-            } catch (Exception e) {
-                throw repExceptionHandler(new RepException(e.getCause()));
+            for (String id : ids) {
+                rep.deleteById(id);
             }
         } else {
-            throw new SerException("删除 id 不能为空！");
+            throw new RepException("删除 id 不能为空！");
         }
 
 
     }
 
     @Override
-    public void remove(BE... entities) throws SerException {
-        try {
-            rep.deleteAll(Arrays.asList(entities));
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
+    public void remove(BE... entities) {
+        rep.deleteAll(Arrays.asList(entities));
+
     }
 
     @Override
-    public void update(List<BE> entities) throws SerException {
+    public void update(List<BE> entities) {
         rep.saveAll(entities);
     }
 
     @Override
-    public void update(BE... entities) throws SerException {
-        try {
-            for (BE be : entities) {
-                rep.save(be);
-            }
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-    }
-
-    @Override
-    public Boolean exists(String id) throws SerException {
-        try {
-            return rep.existsById(id);
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-    }
-
-
-    @Override
-    public List<Object> findBySql(String sql) throws SerException {
-        try {
-            Query nativeQuery = entityManager.createNativeQuery(sql);
-            return nativeQuery.getResultList();
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
+    public void update(BE... entities) {
+        for (BE be : entities) {
+            rep.save(be);
         }
 
     }
 
     @Override
-    public <T> T findOneBySql(String sql, Class clazz, String... fields) throws SerException {
+    public Boolean exists(String id) {
+        return rep.existsById(id);
+
+    }
+
+
+    @Override
+    public List<Object> findBySql(String sql) {
+        Query nativeQuery = entityManager.createNativeQuery(sql);
+        return nativeQuery.getResultList();
+
+
+    }
+
+    @Override
+    public <T> T findOneBySql(String sql, Class clazz, String... fields) {
         List<T> objects = findBySql(sql, clazz, fields);
         if (objects.size() > 0) {
             return objects.get(0);
         } else {
-            return  null;
+            return null;
         }
     }
 
     @Override
-    public <T> List<T> findBySql(String sql, Class clazz, String... fields) throws SerException {
+    public <T> List<T> findBySql(String sql, Class clazz, String... fields) {
         List<Field> all_fields = new ArrayList<>(); //源类属性列表
         Class temp_clazz = clazz;
         while (null != temp_clazz) { //数据源类所有属性（包括父类）
@@ -264,25 +215,20 @@ public class ServiceImpl<BE extends BaseEntity, BD extends BaseDTO> implements S
                 list.add((T) obj);
             }
         } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
+            throw new RepException(e.getMessage());
         }
 
         return list;
     }
 
     @Override
-    public void executeSql(String sql) throws SerException {
-        try {
-            Query query = entityManager.createNativeQuery(sql);
-            query.executeUpdate();
-        } catch (Exception e) {
-            throw repExceptionHandler(new RepException(e.getCause()));
-        }
-
+    public void executeSql(String sql) {
+        Query query = entityManager.createNativeQuery(sql);
+        query.executeUpdate();
     }
 
     @Override
-    public String getTableName(Class clazz) throws SerException {
+    public String getTableName(Class clazz) {
         try {
             if (clazz.isAnnotationPresent(Table.class)) {
                 Annotation annotation = clazz.getAnnotation(Table.class);
@@ -298,46 +244,10 @@ public class ServiceImpl<BE extends BaseEntity, BD extends BaseDTO> implements S
                 }
             }
         } catch (Exception e) {
-            throw new SerException(e.getMessage());
+            throw new RepException(e.getMessage());
         }
         String msg = "解析表名错误！";
-        throw new SerException(msg);
+        throw new RepException(msg);
     }
 
-
-    protected SerException repExceptionHandler(RepException e) {
-        e.printStackTrace();
-        String msg = null;
-        Throwable throwable = e.getThrowable();
-        if (throwable instanceof ConstraintViolationException) { //唯一约束异常
-            ConstraintViolationException ex = ((ConstraintViolationException) throwable);
-            msg = ex.getCause().getMessage();
-            msg = StringUtils.substringAfter(msg, "Duplicate entry '");
-            if (StringUtils.isNotBlank(msg)) {
-                msg = "[" + StringUtils.substringBefore(msg, "' for key") + "]已存在！";
-            } else {
-                msg = ex.getCause().getMessage();
-            }
-            if (msg.indexOf("cannot be null") != -1) {
-                msg = StringUtils.substringAfter(msg, "'");
-                msg = StringUtils.substringBefore(msg, "'").toLowerCase() + "不能为空！";
-            }
-        } else if (throwable instanceof DataException) {
-            DataException ex = ((DataException) throwable);
-            msg = ex.getCause().getMessage();
-            msg = StringUtils.substringAfter(msg, "Data too long for column '");
-            if (StringUtils.isNotBlank(msg)) {
-                msg = "[" + StringUtils.substringBefore(msg, "' at row") + "]数据超出长度！";
-            } else {
-                msg = ex.getCause().getMessage();
-            }
-        } else if (throwable instanceof QueryTimeoutException) {
-            msg = "查询超时！";
-        }
-        if (StringUtils.isBlank(msg)) {
-            msg = e.getMessage();
-        }
-        return new SerException(msg);
-
-    }
 }

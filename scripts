@@ -1,7 +1,7 @@
 清理包：mvn clean
 
-打包开发环境：mvn clean package -Dmaven.test.skip=true
+打包开发环境：mvn clean package 或者 mvn clean package -Dmaven.test.skip=true
 
-打包正式环境：mvn clean package -Ppro -Dmaven.test.skip=true
+打包正式环境：mvn clean package -Ppro 或者 mvn clean package -Ppro -Dmaven.test.skip=true
 
-打包测试环境：mvn clean package -Ptest -Dmaven.test.skip=true
+打包测试环境：mvn clean package -Ptest 或者 mvn clean package -Ptest -Dmaven.test.skip=true
