@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @Date: [19-5-29 下午12:56]
  * @Description: 断路器配置
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 @Aspect
 @Component

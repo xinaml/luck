@@ -2,6 +2,7 @@ package com.xinaml.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.xinaml.gateway.result.Result;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -25,16 +26,13 @@ public class AuthFilter  implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst("token");
-//        if ("token".equals(token)) {
-//            return chain.filter(exchange);
-//        }
-        if (null==(token)) {
+        if (StringUtils.isNotBlank(token)) {
             return chain.filter(exchange);
         }
         ServerHttpResponse response = exchange.getResponse();
         Result data = new Result();
         data.setCode(HttpStatus.UNAUTHORIZED.value());
-        data.setMsg("非法请求");
+        data.setMsg("非法请求！");
         byte[] datas = JSON.toJSONString(data).getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(datas);
         response.setStatusCode(HttpStatus.UNAUTHORIZED);

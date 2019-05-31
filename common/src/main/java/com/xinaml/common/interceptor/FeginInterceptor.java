@@ -2,7 +2,6 @@ package com.xinaml.common.interceptor;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -18,20 +17,20 @@ import java.util.Map;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Configuration
 public class FeginInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         try {
-            Map<String,String> headers = getHeaders();
-            for(String headerName : headers.keySet()){
+            Map<String, String> headers = getHeaders();
+            for (String headerName : headers.keySet()) {
                 requestTemplate.header(headerName, headers.get(headerName));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private Map<String, String> getHeaders(){
+
+    private Map<String, String> getHeaders() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Map<String, String> map = new LinkedHashMap<>();
         Enumeration<String> enumeration = request.getHeaderNames();

@@ -5,7 +5,7 @@ package com.xinaml.common.constant;
  * @Date: [19-5-29 下午2:01]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 public final class MsgConst {
     public static final String SERVER_ERROR="服务器异常！";

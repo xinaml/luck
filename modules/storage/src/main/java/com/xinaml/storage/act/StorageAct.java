@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Author: [lgq]
  * @Date: [19-5-6 上午8:56]
@@ -30,6 +32,11 @@ public class StorageAct {
         return port;
     }
 
+    @GetMapping("token")
+    public String get(HttpServletRequest request) {
+        String token = request.getHeader("token");
+        return token;
+    }
 
     @GetMapping("get")
     public Storage get(String name) {

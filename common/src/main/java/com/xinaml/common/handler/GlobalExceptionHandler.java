@@ -10,7 +10,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.rmi.ServerException;
 import java.util.List;
 
 /**
@@ -26,29 +25,31 @@ public class GlobalExceptionHandler {
 
     /**
      * 未识别的异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(Exception.class)
     public Result handleException(Exception e) {
         e.printStackTrace();
-        return new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(),MsgConst.SERVER_ERROR);
+        return new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), MsgConst.SERVER_ERROR);
     }
 
     /**
-     *
      * 持久化异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(RepException.class)
     public Result handleException(RepException e) {
         e.printStackTrace();
-        return new Result(-2,e.getMessage());
+        return new Result(-2, e.getMessage());
     }
 
     /**
      * 业务异常
+     *
      * @param e
      * @return
      */
@@ -56,11 +57,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SerException.class)
     public Result handleException(SerException e) {
         e.printStackTrace();
-        return new Result(-1,e.getMessage());
+        return new Result(-1, e.getMessage());
     }
 
     /**
      * 参数异常
+     *
      * @param e
      * @return
      */
@@ -78,19 +80,20 @@ public class GlobalExceptionHandler {
 
     /**
      * 熔断器异常
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(HystrixRuntimeException.class)
     public Result hystrixRuntimeException(HystrixRuntimeException e) {
         e.printStackTrace();
-        String msg=MsgConst.HYSTRIX_ERROR;
+        String msg = MsgConst.HYSTRIX_ERROR;
         Integer code = HttpStatus.INTERNAL_SERVER_ERROR.value();
-        if(e.getMessage().indexOf("timed-out")!=-1){
-            msg=MsgConst.HYSTRIX_TIMEOUT;
-            code =HttpStatus.GATEWAY_TIMEOUT.value();
+        if (e.getMessage().indexOf("timed-out") != -1) {
+            msg = MsgConst.HYSTRIX_TIMEOUT;
+            code = HttpStatus.GATEWAY_TIMEOUT.value();
         }
-        Result result = new Result(code,msg);
+        Result result = new Result(code, msg);
         return result;
     }
 

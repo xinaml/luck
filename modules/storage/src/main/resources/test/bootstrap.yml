@@ -50,6 +50,13 @@ feign:
 ribbon:
   ReadTimeout: 3000
   ConnectTimeout: 200
+#获取到HttpServletRequest
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
 
 management:
   endpoints:

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Author: [lgq]
  * @Date: [19-5-6 下午4:58]
- * @Description:
+ * @Description: 负载均衡配置
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */

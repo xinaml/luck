@@ -20,21 +20,6 @@ DOC:
     
 分布式事务（seata）：https://github.com/seata/seata/releases    
 
-
-    
-启动顺序：
-        
-        1.seata-server(请下载0.51版本)
-
-        2.eureka
-        
-        3.gateway
-        
-        4.config  
-           
-        5.其他服务
-        
-        （服务注册到eureka默认需要30秒）
         
 模块及端口说明：   
 
@@ -51,6 +36,7 @@ DOC:
            parent (功能模块父依赖)
          
            modules： 
+           
              order （订单模块）8082
                           
              storage （存储模块）8081
@@ -62,21 +48,8 @@ DOC:
     
     
     
-  maven 仓库setting.xml配置(加速)：
-    <mirrors>
-            <mirror>
-                <id>default</id>
-                <mirrorOf>repositoryId</mirrorOf>
-                <name>default Mirror</name>
-                <url>http://my.repository.com/repo/path</url>
-            </mirror>
-            <mirror>
-                <id>nexus-aliyun</id>
-                <mirrorOf>aliyun</mirrorOf>
-                <name>aliyun maven</name>
-                <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-            </mirror>
-    </mirrors>    
+   
     
     
- @HystrixCommand：涉及远程调用的加该注解         
+        
+ 

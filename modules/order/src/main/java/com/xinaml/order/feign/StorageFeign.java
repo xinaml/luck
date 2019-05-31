@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @FeignClient(value = "storage")
 public interface StorageFeign {
+
+    @GetMapping("token")
+    String token();
+
     //负载均衡测试
     @GetMapping("port")
     String port();
