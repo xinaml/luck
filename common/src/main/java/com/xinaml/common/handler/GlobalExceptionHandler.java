@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RepException.class)
     public Result handleException(RepException e) {
         e.printStackTrace();
-        return new Result(-2,MsgConst.SERVER_ERROR);
+        return new Result(-2,e.getMessage());
     }
 
     /**
