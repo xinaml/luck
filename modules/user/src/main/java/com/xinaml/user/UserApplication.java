@@ -27,7 +27,7 @@ public class UserApplication {
         SpringApplication.run(UserApplication.class, args);
     }
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid")
     public DruidDataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         return druidDataSource;

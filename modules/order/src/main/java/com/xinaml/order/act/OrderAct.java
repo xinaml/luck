@@ -39,6 +39,11 @@ public class OrderAct {
         return storageFeign.token();
     }
 
+    /**
+     * 表单重复提交
+     * @param request
+     * @return
+     */
     @PostMapping("add")
     public String add(HttpServletRequest request) {
         String token = request.getHeader("token");
