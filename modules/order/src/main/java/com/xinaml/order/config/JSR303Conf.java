@@ -1,6 +1,6 @@
 package com.xinaml.order.config;
 
-import com.xinaml.common.jsr303.JSR303Aspect;
+import com.xinaml.common.aspect.JSR303Aspect;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Order(Integer.MIN_VALUE + 1)
+@Order(2)
 @Aspect
 @Component
 public class JSR303Conf extends JSR303Aspect {

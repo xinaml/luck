@@ -1,4 +1,4 @@
-package com.xinaml.common.jsr303;
+package com.xinaml.common.aspect;
 
 import com.xinaml.common.result.Result;
 import com.xinaml.common.utils.ResponseUtil;
@@ -17,7 +17,13 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 
-
+/**
+ * @Author: [lgq]
+ * @Date: [19-6-1 下午2:01]
+ * @Description: 数据校验
+ * @Version: [1.0.0]
+ * @Copy: [com.xinaml]
+ */
 public class JSR303Aspect {
     @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)" +
             " || @annotation(org.springframework.web.bind.annotation.GetMapping)" +

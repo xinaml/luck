@@ -18,8 +18,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * 处理前端传过来的日期，及返回的json日期
- * 直接LocalDateTime，LocalDate，LocalTime接收
+ * @Author: [lgq]
+ * @Date: [19-6-1 下午2:01]
+ * @Description: 处理传入及返回参数日期类型转换
+ * @Version: [1.0.0]
+ * @Copy: [com.xinaml]
  */
 public class GlobalDateConverterHandler {
     /**

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * @Author: [lgq]
  * @Date: [19-5-31 下午4:12]
- * @Description:
+ * @Description: request header传递
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */

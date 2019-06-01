@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 /**
  * @Author: [lgq]
  * @Date: [19-5-29 下午12:56]
- * @Description:
+ * @Description: 断路器aop
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */

@@ -3,6 +3,10 @@
 spring:
   application:
     name: user
+  redis:
+    host: localhost
+    password: root
+    port: 6379
   jpa:
     database: mysql
     show-sql: true

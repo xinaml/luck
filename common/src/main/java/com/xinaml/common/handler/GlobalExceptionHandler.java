@@ -7,17 +7,16 @@ import com.xinaml.common.exception.SerException;
 import com.xinaml.common.result.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 
 /**
- * 全局异常处理
- *
  * @Author: [lgq]
  * @Date: [19-5-28 上午9:30]
- * @Description:
+ * @Description:全局异常处理
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
@@ -33,6 +32,12 @@ public class GlobalExceptionHandler {
     public Result handleException(Exception e) {
         e.printStackTrace();
         return new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), MsgConst.SERVER_ERROR);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public Result handleException(HttpRequestMethodNotSupportedException e) {
+        e.printStackTrace();
+        return new Result(HttpStatus.METHOD_NOT_ALLOWED.value(), "请求方法【"+e.getMethod()+"】不支持!");
     }
 
     /**
@@ -93,8 +98,7 @@ public class GlobalExceptionHandler {
             msg = MsgConst.HYSTRIX_TIMEOUT;
             code = HttpStatus.GATEWAY_TIMEOUT.value();
         }
-        Result result = new Result(code, msg);
-        return result;
+        return new Result(code, msg);
     }
 
 }

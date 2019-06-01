@@ -11,11 +11,12 @@ import java.io.IOException;
 
 
 /**
- * 写入数据到页面
- *
- * @author lgq
- * @date 2018/4/15
- **/
+ * @Author: [lgq]
+ * @Date: [19-6-1 下午2:01]
+ * @Description: 写入数据到页面
+ * @Version: [1.0.0]
+ * @Copy: [com.xinaml]
+ */
 public final class ResponseUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResponseUtil.class);
 

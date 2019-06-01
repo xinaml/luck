@@ -3,7 +3,7 @@ package com.xinaml.common.result;
 /**
  * @Author: [lgq]
  * @Date: [19-5-6 下午2:13]
- * @Description:
+ * @Description:返回对象
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
