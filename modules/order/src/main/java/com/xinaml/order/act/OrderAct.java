@@ -4,6 +4,8 @@ import com.xinaml.common.exception.SerException;
 import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.order.feign.StorageFeign;
 import com.xinaml.order.vo.StorageVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -24,8 +26,24 @@ import javax.validation.constraints.NotBlank;
 @RefreshScope
 @RestController
 public class OrderAct {
+    private  static  Logger LOG = LoggerFactory.getLogger(OrderAct.class);
+
     @Autowired(required = false)
     private StorageFeign storageFeign;
+
+    /**
+     * log
+     *
+     * @return
+     */
+    @GetMapping("log")
+    public String log( ) {
+        LOG.info("this is info");
+        LOG.error("this is error");
+        LOG.warn("this is warn");
+        LOG.debug("this is debug");
+        return "log";
+    }
 
     /**
      * token传递

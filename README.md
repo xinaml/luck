@@ -1,6 +1,6 @@
 #luck
 
-IDE: idea 2019.1.2
+IDE: fedora27 + idea 2019.1.2
 
 JDK: 1.8.0_171
 
