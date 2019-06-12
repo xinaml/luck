@@ -5,3 +5,4 @@
 打包正式环境：mvn clean package -Ppro 或者 mvn clean package -Ppro -Dmaven.test.skip=true
 
 打包测试环境：mvn clean package -Ptest 或者 mvn clean package -Ptest -Dmaven.test.skip=true
+
