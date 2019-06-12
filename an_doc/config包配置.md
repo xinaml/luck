@@ -3,18 +3,18 @@
     
     
     
-    DateConverterConf：日期转换器
+    1.DateConverterConf：日期转换器
     
-    ExceptionHandlerConf：异常处理器
+    2.ExceptionHandlerConf：异常处理器
     
-    FeginInterceptorConf：token传递
+    3.FeginInterceptorConf：token传递
     
-    FeignConf：调用重试
+    4.FeignConf：调用重试
     
-    HystrixConf：断路器
+    5.HystrixConf：断路器
     
-    JSR303Conf：数据校验
+    6.JSR303Conf：数据校验
     
-    RibbonConf：负载均衡
+    7.RibbonConf：负载均衡
     
     功能模块只是开启扫描，具体实现见继承的common父类
