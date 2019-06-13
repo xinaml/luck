@@ -21,7 +21,7 @@ spring:
     gateway:
       routes:
       - id: order
-        uri: lb://order:8082
+        uri: lb://order
         predicates:
         - Path=/order/**
         filters:
@@ -37,7 +37,7 @@ spring:
             redis-rate-limiter.burstCapacity: 1 #允许在一秒钟内完成的最大请求数（令牌桶容量）
             key-resolver: "#{@ipKeyResolver}"
       - id: storage
-        uri: lb://storage:8081
+        uri: lb://storage
         predicates:
         - Path=/storage/**
         filters:
