@@ -10,7 +10,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
+import com.netflix.hystrix.exception.HystrixRuntimeException.FailureType;
 import java.util.List;
 
 /**
@@ -94,7 +94,8 @@ public class GlobalExceptionHandler {
         e.printStackTrace();
         String msg = MsgConst.HYSTRIX_ERROR;
         Integer code = HttpStatus.INTERNAL_SERVER_ERROR.value();
-        if (e.getMessage().indexOf("timed-out") != -1) {
+        FailureType type = e.getFailureType();
+        if(type.equals(FailureType.TIMEOUT)){
             msg = MsgConst.HYSTRIX_TIMEOUT;
             code = HttpStatus.GATEWAY_TIMEOUT.value();
         }
