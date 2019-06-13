@@ -10,6 +10,12 @@ MYSQL: 8.0.16
 
 REDIS: 5.0.4
 
+ELASTICSEARCH: 6.5.0
+
+LOGSTASH: 6.5.4
+
+KIBANA: 6.5.0
+
 FRAME: 
         spring-cloud: Greenwich.SR1
         Spring-boot: 2.1.4.RELEASE
