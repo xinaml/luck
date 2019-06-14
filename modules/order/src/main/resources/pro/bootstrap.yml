@@ -48,7 +48,7 @@ server:
   tomcat:
     uri-encoding: UTF-8
 
-#注册到服务治理
+#注册到服务治理（如果是集群，也只需要向一个eureka注册即可）理
 eureka:
   client:
     serviceUrl:

@@ -14,7 +14,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:${server.port}/eureka/
     #是否向服务注册中心注册自己
-    register-with-eureka: false
+    register-with-eureka: true
     #是否检索服务
     fetch-registry: false
 
