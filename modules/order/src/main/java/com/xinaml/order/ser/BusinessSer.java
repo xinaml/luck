@@ -22,7 +22,7 @@ public class BusinessSer {
 
     @Autowired(required = false)
     private StorageFeign storageFeign;
-    @Autowired
+    @Autowired(required = false)
     private UserFeign userFeign;
     @Autowired
     private OrderSer orderSer;

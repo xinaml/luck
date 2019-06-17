@@ -36,12 +36,12 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
 
     @Transactional
     @Override
-    public Boolean subtract(String userId, Double account) {
+    public String subtract(String userId, Double account) {
         UserDTO dto = new UserDTO();
         dto.addRT(RT.eq("id",userId));
         User user = findOne(dto);
         user.setAccount(user.getAccount()-account);
         super.save(user);
-        return true;
+        return "success";
     }
 }

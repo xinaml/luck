@@ -43,11 +43,13 @@ public class StorageSerImpl extends ServiceImpl<Storage,StorageDTO> implements S
     }
     @Transactional
     @Override
-    public void subtract(String name, Integer count) {
+    public String subtract(String name, Integer count) {
         StorageDTO dto = new StorageDTO();
         dto.addRT(RT.eq("name",name));
         Storage storage = findOne(dto);
         storage.setCount(storage.getCount()-1);
         super.save(storage);
+        return  "success";
+
     }
 }

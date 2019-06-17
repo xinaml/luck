@@ -35,14 +35,16 @@ public class TxAct {
      * @return
      */
     @RequestMapping("/purchase/rollback")
-    public Boolean purchaseRollback() {
+    public String purchaseRollback() {
         try {
             businessSer.purchase("2", "手机", 1,100.0);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "fail";
         }
-        return true;
+        return "success";
     }
+
+
 
 }

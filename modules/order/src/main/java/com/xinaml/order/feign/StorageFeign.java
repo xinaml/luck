@@ -2,8 +2,7 @@ package com.xinaml.order.feign;
 
 import com.xinaml.order.vo.StorageVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author: [lgq]
@@ -35,7 +34,7 @@ public interface StorageFeign {
      * @param name
      * @param count
      */
-    @GetMapping("subtract")
-    Boolean subtract(@RequestParam("name") String name,@RequestParam("count") Integer count);
+    @PostMapping("subtract")
+    String subtract(@RequestParam("name") String name,@RequestParam("count") Integer count);
 
 }

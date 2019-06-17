@@ -3,7 +3,9 @@ package com.xinaml.order.act;
 import com.xinaml.common.exception.SerException;
 import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.order.feign.StorageFeign;
+import com.xinaml.order.feign.UserFeign;
 import com.xinaml.order.vo.StorageVO;
+import com.xinaml.order.vo.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class OrderAct {
 
     @Autowired(required = false)
     private StorageFeign storageFeign;
+    @Autowired(required = false)
+    private UserFeign userFeign;
 
     /**
      * log
@@ -88,6 +92,7 @@ public class OrderAct {
     @GetMapping("get")
     public StorageVO get(@NotBlank(message = "名字不能为空！") String name) {
         StorageVO rs = storageFeign.get(name);
+        UserVO ur = userFeign.get(name);
         return rs;
     }
 

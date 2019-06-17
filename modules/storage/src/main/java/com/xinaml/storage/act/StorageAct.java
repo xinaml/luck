@@ -38,12 +38,6 @@ public class StorageAct {
         return token;
     }
 
-    @GetMapping("get")
-    public Storage get(String name) {
-        Storage storage = storageSer.findAll().get(0);
-        storage.setId(port);
-        return storage;
-    }
 
     @GetMapping("save")
     public Storage save(Storage storage) {

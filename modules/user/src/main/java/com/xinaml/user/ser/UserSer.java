@@ -20,7 +20,7 @@ public interface UserSer extends Ser<User, UserDTO> {
         return null;
     }
 
-    default Boolean subtract(String userId,Double account) {
+    default String subtract(String userId,Double account) {
         return null;
     }
 }

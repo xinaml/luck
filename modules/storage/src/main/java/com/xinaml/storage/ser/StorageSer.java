@@ -20,6 +20,7 @@ public interface StorageSer extends Ser<Storage,StorageDTO> {
         return null;
     }
 
-    default void  subtract(String name ,Integer count){
+    default String  subtract(String name ,Integer count){
+        return null;
     }
 }

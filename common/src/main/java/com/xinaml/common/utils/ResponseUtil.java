@@ -37,6 +37,8 @@ public final class ResponseUtil {
 
     public static void writeData(Object data) {
         try {
+            HttpServletResponse response = init();
+            response.reset();
             init().getWriter().print(JSON.toJSON(data));
             init().getWriter().close();
         } catch (IOException e) {
@@ -44,12 +46,5 @@ public final class ResponseUtil {
         }
     }
 
-    public static void writeData(HttpServletResponse response, Object data) {
-        try {
-            init().getWriter().print(JSON.toJSON(data));
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
-        }
-    }
 
 }

@@ -45,7 +45,7 @@ public class RepeatSubmitAspect {
         if (!redisRep.exists(key)) {// 是否重复提交
             redisRep.put( key,"", 2, TimeUnit.SECONDS);//缓存2秒
         } else {
-            Result rs = new Result(3,MsgConst.SERVER_ERROR);
+            Result rs = new Result(3,MsgConst.REPEAT_ERROR);
             ResponseUtil.writeData(rs);
             return null;
         }
