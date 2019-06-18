@@ -1,8 +1,9 @@
 package com.xinaml.order.act;
 
+import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.order.ser.BusinessSer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,9 +24,10 @@ public class TxAct {
      *
      * @return
      */
-    @RequestMapping("/purchase/commit")
+    @HystrixCommand
+    @PostMapping("/purchase/commit")
     public Boolean purchaseCommit() {
-        businessSer.purchase("1", "手机", 1,100.0);
+        businessSer.purchase("1", "手机", 1, 100.0);
         return true;
     }
 
@@ -34,17 +36,12 @@ public class TxAct {
      *
      * @return
      */
-    @RequestMapping("/purchase/rollback")
+    @HystrixCommand
+    @PostMapping("/purchase/rollback")
     public String purchaseRollback() {
-        try {
-            businessSer.purchase("2", "手机", 1,100.0);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "fail";
-        }
+        businessSer.purchase("2", "手机", 1, 100.0);
         return "success";
     }
-
 
 
 }

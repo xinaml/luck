@@ -1,5 +1,6 @@
 package com.xinaml.common.aspect;
 
+import com.xinaml.common.constant.CodeConst;
 import com.xinaml.common.result.Result;
 import com.xinaml.common.utils.ResponseUtil;
 import org.apache.commons.lang.StringUtils;
@@ -25,13 +26,15 @@ import java.util.List;
  * @Copy: [com.xinaml]
  */
 public class JSR303Aspect {
-    @Pointcut("@annotation(org.springframework.web.bind.annotation.RequestMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.GetMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.PostMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.PutMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.DeleteMapping)" +
-            " || @annotation(org.springframework.web.bind.annotation.PatchMapping)"
-    )
+
+    /**
+     * 只拦截act
+     */
+    @Pointcut("(@annotation(org.springframework.web.bind.annotation.RequestMapping)" +
+            " ||@annotation(org.springframework.web.bind.annotation.PostMapping)" +
+            " ||@annotation(org.springframework.web.bind.annotation.PutMapping)" +
+            " ||@annotation(org.springframework.web.bind.annotation.DeleteMapping)" +
+            " ||@annotation(org.springframework.web.bind.annotation.PatchMapping))&&" + "execution(* com.xinaml.*.act..*.*(..)) ")
     public void pointCut() {
 
     }
@@ -65,7 +68,7 @@ public class JSR303Aspect {
 
                 }
             }
-            if (null != result && writeResult(result)) {
+            if (null != result && writeResult(result)) {//数据校验不通过
                 return null;
             }
         }
@@ -80,7 +83,7 @@ public class JSR303Aspect {
                             String msg = an.toString();
                             msg = StringUtils.substringAfter(msg, "message=");
                             msg = StringUtils.substringBefore(msg, ",");
-                            writeResult(msg);
+                            writeResult(msg);//数据校验不通过
                             return null;
                         }
                     }
@@ -97,7 +100,7 @@ public class JSR303Aspect {
             List<FieldError> fieldErrors = result.getFieldErrors();
             if (null != fieldErrors && fieldErrors.size() > 0) {
                 Result rs = new Result();
-                rs.setCode(2);
+                rs.setCode(CodeConst.PARAM_CODE);
                 rs.setMsg(fieldErrors.get(0).getDefaultMessage());
                 ResponseUtil.writeData(rs);
                 return true;
@@ -108,7 +111,7 @@ public class JSR303Aspect {
 
     protected void writeResult(String msg) {
         Result rs = new Result();
-        rs.setCode(2);
+        rs.setCode(CodeConst.PARAM_CODE);
         rs.setMsg(msg);
         ResponseUtil.writeData(rs);
     }

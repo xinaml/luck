@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @Date: [19-6-17 下午4:05]
  * @Description:
  * @Version: [1.0.0]
- * @Copy: [com.changbei]
+ * @Copy: [com.xinaml]
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserVO {
-    private String username ;
+    private String username;
     private String password;
     private Double account;
 

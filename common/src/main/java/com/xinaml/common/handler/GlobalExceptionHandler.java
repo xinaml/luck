@@ -1,6 +1,7 @@
 package com.xinaml.common.handler;
 
 import com.netflix.hystrix.exception.HystrixRuntimeException;
+import com.xinaml.common.constant.CodeConst;
 import com.xinaml.common.constant.MsgConst;
 import com.xinaml.common.exception.RepException;
 import com.xinaml.common.exception.SerException;
@@ -49,7 +50,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RepException.class)
     public Result handleException(RepException e) {
         e.printStackTrace();
-        return new Result(-2, e.getMessage());
+        return new Result(CodeConst.REP_CODE, e.getMessage());
     }
 
     /**
@@ -62,7 +63,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SerException.class)
     public Result handleException(SerException e) {
         e.printStackTrace();
-        return new Result(-1, e.getMessage());
+        return new Result(CodeConst.SER_CODE, e.getMessage());
     }
 
     /**
@@ -78,7 +79,7 @@ public class GlobalExceptionHandler {
         if (errors.size() > 0) {
             tips = errors.get(0).getDefaultMessage();
         }
-        Result result = new Result(HttpStatus.PAYMENT_REQUIRED.value());
+        Result result = new Result(CodeConst.PARAM_CODE);
         result.setMsg(tips);
         return result;
     }

@@ -20,6 +20,11 @@ public class UserAct {
     @Autowired
     private UserSer userSer;
 
+    @GetMapping("get")
+    public User user(String userId) {
+        return userSer.findAll().get(0);
+    }
+
     @GetMapping("save")
     public User save(User user) {
         return userSer.save(user);

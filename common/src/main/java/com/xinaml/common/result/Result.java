@@ -1,5 +1,7 @@
 package com.xinaml.common.result;
 
+import com.xinaml.common.constant.CodeConst;
+
 /**
  * @Author: [lgq]
  * @Date: [19-5-6 下午2:13]
@@ -8,7 +10,7 @@ package com.xinaml.common.result;
  * @Copy: [com.xinaml]
  */
 public class Result {
-    private Integer code=0;
+    private Integer code=CodeConst.NORMAL_CODE;
     private String msg;
     private Object data;
 
@@ -18,6 +20,9 @@ public class Result {
 
     public Result(Integer code) {
         this.code = code;
+    }
+    public Result(Object data) {
+        this.data = data;
     }
 
     public Result(Integer code, String msg) {

@@ -1,6 +1,8 @@
 package com.xinaml.common.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.xinaml.common.result.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -38,9 +40,12 @@ public final class ResponseUtil {
     public static void writeData(Object data) {
         try {
             HttpServletResponse response = init();
-            response.reset();
-            init().getWriter().print(JSON.toJSON(data));
-            init().getWriter().close();
+            if(data instanceof Result){ //强制返回给前端json
+                response.getWriter().print(JSON.toJSONString(data,SerializerFeature.WriteMapNullValue));
+            }else {
+                response.getWriter().print(JSON.toJSONString(new Result(data),SerializerFeature.WriteMapNullValue));
+            }
+            response.getWriter().close();
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }

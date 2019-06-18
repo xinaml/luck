@@ -1,5 +1,6 @@
 package com.xinaml.order.ser;
 
+import com.xinaml.common.exception.SerException;
 import com.xinaml.order.entity.Order;
 import com.xinaml.order.feign.StorageFeign;
 import com.xinaml.order.feign.UserFeign;
@@ -40,7 +41,7 @@ public class BusinessSer {
         storageFeign.subtract(name, count);//减去库存
         userFeign.subtract(userId, price);//减去用户存款
         if(userId.equals("2")){
-            throw new RuntimeException("下单失败！");
+            throw new SerException("下单失败！");
         }
         //生成订单
         Order order = new Order();

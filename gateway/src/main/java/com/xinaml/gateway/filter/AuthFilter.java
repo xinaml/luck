@@ -1,6 +1,7 @@
 package com.xinaml.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.xinaml.gateway.result.Result;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -33,7 +34,7 @@ public class AuthFilter  implements GlobalFilter {
         Result data = new Result();
         data.setCode(HttpStatus.UNAUTHORIZED.value());
         data.setMsg("非法请求！");
-        byte[] datas = JSON.toJSONString(data).getBytes(StandardCharsets.UTF_8);
+        byte[] datas = JSON.toJSONString(data,SerializerFeature.WriteMapNullValue).getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(datas);
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");

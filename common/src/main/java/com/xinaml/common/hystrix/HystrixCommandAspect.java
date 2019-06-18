@@ -44,6 +44,7 @@ public class HystrixCommandAspect {
             try {
                 ResponseUtil.writeData(result);
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }else { //直接返回结果
             ResponseUtil.writeData(object);

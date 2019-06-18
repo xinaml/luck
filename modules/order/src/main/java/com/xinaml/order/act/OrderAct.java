@@ -5,7 +5,6 @@ import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.order.feign.StorageFeign;
 import com.xinaml.order.feign.UserFeign;
 import com.xinaml.order.vo.StorageVO;
-import com.xinaml.order.vo.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +27,10 @@ import javax.validation.constraints.NotBlank;
 @RefreshScope
 @RestController
 public class OrderAct {
-    private  static  Logger LOG = LoggerFactory.getLogger(OrderAct.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrderAct.class);
 
     @Autowired(required = false)
     private StorageFeign storageFeign;
-    @Autowired(required = false)
-    private UserFeign userFeign;
 
     /**
      * log
@@ -41,7 +38,7 @@ public class OrderAct {
      * @return
      */
     @GetMapping("log")
-    public String log( ) {
+    public String log() {
         LOG.info("this is info");
         LOG.error("this is error");
         LOG.warn("this is warn");
@@ -49,51 +46,35 @@ public class OrderAct {
         return "log";
     }
 
+    @GetMapping("get")
+    public StorageVO get(String name) {
+        return storageFeign.get(name);
+    }
+
+
     /**
      * token传递
      *
      * @return
      */
+    @HystrixCommand
     @GetMapping("token")
     public String token(HttpServletRequest request) {
         String token = request.getHeader("token");
-        System.out.println(token);
+        LOG.info(token);
         return storageFeign.token();
     }
 
-    /**
-     * 表单重复提交
-     * @param request
-     * @return
-     */
-    @PostMapping("add")
-    public String add(HttpServletRequest request) {
-        String token = request.getHeader("token");
-        return "add";
-    }
 
     /**
      * 负载均衡测试
      *
      * @return
      */
+    @HystrixCommand
     @GetMapping("port")
     public String port() {
         return storageFeign.port();
-    }
-
-    /**
-     * 远程调用
-     *
-     * @param name
-     * @return
-     */
-    @HystrixCommand
-    @GetMapping("get")
-    public StorageVO get(@NotBlank(message = "名字不能为空！") String name) {
-        StorageVO rs = storageFeign.get(name);
-        UserVO ur = userFeign.get(name);
-        return rs;
     }
 
     /**

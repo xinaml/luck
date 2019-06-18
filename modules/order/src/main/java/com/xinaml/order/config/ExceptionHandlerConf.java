@@ -1,6 +1,7 @@
 package com.xinaml.order.config;
 
 import com.xinaml.common.handler.GlobalExceptionHandler;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
