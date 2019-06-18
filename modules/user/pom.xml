@@ -13,7 +13,7 @@
     <artifactId>user</artifactId>
     <version>${luck.version}</version>
     <name>user</name>
-    <description>仓储</description>
+    <description>授权</description>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -27,6 +27,7 @@
             <artifactId>jpa</artifactId>
             <version>${luck.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

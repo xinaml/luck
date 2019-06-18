@@ -2,6 +2,8 @@ package com.xinaml.order.act;
 
 import com.xinaml.common.exception.SerException;
 import com.xinaml.common.hystrix.HystrixCommand;
+import com.xinaml.common.utils.UserUtil;
+import com.xinaml.common.vo.UserVO;
 import com.xinaml.order.feign.StorageFeign;
 import com.xinaml.order.feign.UserFeign;
 import com.xinaml.order.vo.StorageVO;
@@ -49,6 +51,10 @@ public class OrderAct {
     @GetMapping("get")
     public StorageVO get(String name) {
         return storageFeign.get(name);
+    }
+    @GetMapping("user")
+    public UserVO user(String token) {
+        return UserUtil.getUser(token);
     }
 
 

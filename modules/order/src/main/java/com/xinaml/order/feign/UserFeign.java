@@ -1,6 +1,5 @@
 package com.xinaml.order.feign;
 
-import com.xinaml.order.vo.UserVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,11 +26,8 @@ public interface UserFeign {
      * @param userId
      * @param account
      */
-    @RequestMapping(value = "subtract",method = RequestMethod.POST)
+    @RequestMapping(value = "subtract", method = RequestMethod.POST)
     String subtract(@RequestParam("userId") String userId, @RequestParam("account") Double account);
 
-    //远程调用测试
-    @RequestMapping(value = "get",method = RequestMethod.GET)
-    UserVO get(@RequestParam("userId") String userId);
 
 }

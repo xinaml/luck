@@ -1,6 +1,7 @@
 package com.xinaml.common.handler;
 
 import com.netflix.hystrix.exception.HystrixRuntimeException;
+import com.netflix.hystrix.exception.HystrixRuntimeException.FailureType;
 import com.xinaml.common.constant.CodeConst;
 import com.xinaml.common.constant.MsgConst;
 import com.xinaml.common.exception.RepException;
@@ -11,7 +12,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.netflix.hystrix.exception.HystrixRuntimeException.FailureType;
+
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result handleException(HttpRequestMethodNotSupportedException e) {
         e.printStackTrace();
-        return new Result(HttpStatus.METHOD_NOT_ALLOWED.value(), "请求方法【"+e.getMethod()+"】不支持!");
+        return new Result(HttpStatus.METHOD_NOT_ALLOWED.value(), "请求方法【" + e.getMethod() + "】不支持!");
     }
 
     /**
@@ -50,7 +51,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RepException.class)
     public Result handleException(RepException e) {
         e.printStackTrace();
-        return new Result(CodeConst.REP_CODE, e.getMessage());
+        int code = CodeConst.REP_CODE;
+        String msg = e.getMessage();
+        String[] tmps = msg.split("@");
+        if (tmps.length > 1) {
+            code = Integer.parseInt(tmps[0]);
+            msg = tmps[1];
+        }
+        new RepException(msg).printStackTrace();
+        return new Result(code, msg);
     }
 
     /**
@@ -62,8 +71,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SerException.class)
     public Result handleException(SerException e) {
-        e.printStackTrace();
-        return new Result(CodeConst.SER_CODE, e.getMessage());
+
+        int code = CodeConst.SER_CODE;
+        String msg = e.getMessage();
+        String[] tmps = msg.split("@");
+        if (tmps.length > 1) {
+            code = Integer.parseInt(tmps[0]);
+            msg = tmps[1];
+        }
+        new SerException(msg).printStackTrace();
+        return new Result(code, msg);
     }
 
     /**
@@ -96,7 +113,7 @@ public class GlobalExceptionHandler {
         String msg = MsgConst.HYSTRIX_ERROR;
         Integer code = HttpStatus.INTERNAL_SERVER_ERROR.value();
         FailureType type = e.getFailureType();
-        if(type.equals(FailureType.TIMEOUT)){
+        if (type.equals(FailureType.TIMEOUT)) {
             msg = MsgConst.HYSTRIX_TIMEOUT;
             code = HttpStatus.GATEWAY_TIMEOUT.value();
         }
