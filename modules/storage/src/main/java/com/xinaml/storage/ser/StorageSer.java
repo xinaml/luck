@@ -11,16 +11,16 @@ import com.xinaml.storage.entity.Storage;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public interface StorageSer extends Ser<Storage,StorageDTO> {
-    default Storage get(String name){
+public interface StorageSer extends Ser<Storage, StorageDTO> {
+    default Storage get(String name) {
         return null;
     }
 
-    default Storage save(Storage storage){
+    default Storage save(Storage storage) {
         return null;
     }
 
-    default String  subtract(String name ,Integer count){
+    default String subtract(String name, Integer count) {
         return null;
     }
 }

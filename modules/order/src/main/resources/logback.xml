@@ -16,11 +16,11 @@
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Connection" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="LOGSTASH"/>
     </root>
 </configuration>
 
-<!--https://github.com/logstash/logstash-logback-encoder#tcp-appenders-->
+        <!--https://github.com/logstash/logstash-logback-encoder#tcp-appenders-->

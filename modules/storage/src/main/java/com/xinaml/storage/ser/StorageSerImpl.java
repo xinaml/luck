@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  * @Copy: [com.xinaml]
  */
 @Service
-public class StorageSerImpl extends ServiceImpl<Storage,StorageDTO> implements StorageSer {
+public class StorageSerImpl extends ServiceImpl<Storage, StorageDTO> implements StorageSer {
     @Value("${server.port}")
     private String port;
     @Autowired
@@ -35,21 +35,23 @@ public class StorageSerImpl extends ServiceImpl<Storage,StorageDTO> implements S
         storage.setPrice(111.0);
         return storage;
     }
+
     @Transactional
     @Override
     public Storage save(Storage storage) {
         storage.setCreateDate(LocalDateTime.now());
         return storageRep.save(storage);
     }
+
     @Transactional
     @Override
     public String subtract(String name, Integer count) {
         StorageDTO dto = new StorageDTO();
-        dto.addRT(RT.eq("name",name));
+        dto.addRT(RT.eq("name", name));
         Storage storage = findOne(dto);
-        storage.setCount(storage.getCount()-1);
+        storage.setCount(storage.getCount() - 1);
         super.save(storage);
-        return  "success";
+        return "success";
 
     }
 }

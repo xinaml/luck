@@ -13,7 +13,7 @@
     <artifactId>user</artifactId>
     <version>${luck.version}</version>
     <name>user</name>
-    <description>授权</description>
+    <description>用户，授权</description>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -27,7 +27,25 @@
             <artifactId>jpa</artifactId>
             <version>${luck.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

@@ -11,5 +11,5 @@ import com.xinaml.order.entity.Order;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public interface OrderSer extends Ser<Order,OrderDTO> {
+public interface OrderSer extends Ser<Order, OrderDTO> {
 }

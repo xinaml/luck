@@ -13,5 +13,5 @@ import org.springframework.stereotype.Service;
  * @Copy: [com.xinaml]
  */
 @Service
-public class OrderSerImpl extends ServiceImpl<Order,OrderDTO> implements OrderSer {
+public class OrderSerImpl extends ServiceImpl<Order, OrderDTO> implements OrderSer {
 }

@@ -27,6 +27,7 @@ public class BusinessSer {
     private UserFeign userFeign;
     @Autowired
     private OrderSer orderSer;
+
     /**
      * 减库存，下订单
      *
@@ -36,11 +37,11 @@ public class BusinessSer {
      */
 
     @GlobalTransactional
-    public void purchase(String userId, String name, int count,Double price) {
+    public void purchase(String userId, String name, int count, Double price) {
         String xid = RootContext.getXID();
         storageFeign.subtract(name, count);//减去库存
         userFeign.subtract(userId, price);//减去用户存款
-        if(userId.equals("2")){
+        if (userId.equals("2")) {
             throw new SerException("下单失败！");
         }
         //生成订单

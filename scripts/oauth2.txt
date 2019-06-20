@@ -1,0 +1,12 @@
+/oauth/authorize:授权端点
+
+/oauth/token:令牌端点
+
+/oauth/confirm_access:用户在此处批准授权
+
+/oauth/error: 用于在授权服务器中渲染错误
+
+/oauth/check_token: 由资源服务器用来解码访问令牌
+
+/oauth/token_key: 如果使用JWT令牌，公开密钥用于令牌验证
+

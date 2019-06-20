@@ -22,8 +22,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <feign.version>1.2.47</feign.version>
         <retry.version>1.2.4.RELEASE</retry.version>
+        <oauth2.version>2.1.2.RELEASE</oauth2.version>
         <fastjson.version>1.2.47</fastjson.version>
         <druid.version>1.1.9</druid.version>
         <seata.version>0.5.1</seata.version>

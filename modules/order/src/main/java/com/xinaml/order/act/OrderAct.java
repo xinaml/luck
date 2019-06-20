@@ -52,6 +52,7 @@ public class OrderAct {
     public StorageVO get(String name) {
         return storageFeign.get(name);
     }
+
     @GetMapping("user")
     public UserVO user(String token) {
         return UserUtil.getUser(token);

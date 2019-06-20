@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @EnableFeignClients
 @EnableTransactionManagement //开启事务
 @EnableJpaRepositories(basePackages = {"com.xinaml.storage.rep"}) //持久化接口
-@RestControllerAdvice(basePackages = {"com.xinaml.common.handler"})
-@EntityScan(basePackages = {"com.xinaml.storage.entity"}, basePackageClasses = Jsr310JpaConverters.class)//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
+@EntityScan(basePackages = {"com.xinaml.storage.entity"}, basePackageClasses = Jsr310JpaConverters.class)
+//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
 public class StorageApplication {
 
     public static void main(String[] args) {

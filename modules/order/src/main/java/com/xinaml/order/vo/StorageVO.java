@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StorageVO {
     private String id;
-    private int count ;
+    private int count;
     private Double price;
     private String name;
     private String port;

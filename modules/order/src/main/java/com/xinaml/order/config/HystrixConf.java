@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Order( 3)
+@Order(3)
 @Aspect
 @Component
 public class HystrixConf extends HystrixCommandAspect {

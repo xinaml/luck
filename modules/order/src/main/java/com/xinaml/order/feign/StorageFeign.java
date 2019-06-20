@@ -31,10 +31,11 @@ public interface StorageFeign {
 
     /**
      * 减库存（测试事务）
+     *
      * @param name
      * @param count
      */
     @PostMapping("subtract")
-    String subtract(@RequestParam("name") String name,@RequestParam("count") Integer count);
+    String subtract(@RequestParam("name") String name, @RequestParam("count") Integer count);
 
 }

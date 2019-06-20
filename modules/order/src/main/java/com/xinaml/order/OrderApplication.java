@@ -18,12 +18,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 @EnableEurekaClient
 @SpringBootApplication
 @EnableFeignClients
 @EnableTransactionManagement //开启事务
 @EnableJpaRepositories(basePackages = {"com.xinaml.order.rep"}) //持久化接口
-@EntityScan(basePackages = {"com.xinaml.order.entity"}, basePackageClasses = Jsr310JpaConverters.class)//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
+@EntityScan(basePackages = {"com.xinaml.order.entity"}, basePackageClasses = Jsr310JpaConverters.class)
+//扫描实体映射类，Jsr310JpaConverters：对日期的转换处理
 public class OrderApplication {
 
     public static void main(String[] args) {
