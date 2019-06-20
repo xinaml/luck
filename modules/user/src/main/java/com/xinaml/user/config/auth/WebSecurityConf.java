@@ -14,11 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- * Created by Mr.Yangxiufeng on 2017/12/27.
- * Time:16:42
- * ProjectName:Mirco-Service-Skeleton
- */
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -27,7 +23,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -54,7 +50,8 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/plugins/**", "/favicon.ico")
+        web.ignoring()
+                .antMatchers("/css/**", "/js/**", "/plugins/**", "/favicon.ico")
                 .antMatchers("/login", "/register","logout");
     }
 

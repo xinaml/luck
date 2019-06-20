@@ -38,31 +38,45 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
     private UserDetailsServiceImpl userDetailsService;
 
 
-
-
-    @Bean // 声明 ClientDetails实现
+    @Bean // 客户端保存在数据库
     public ClientDetailsService clientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
     }
 
-
+    /**
+     * 存token
+     *
+     * @return
+     */
     @Bean
-    RedisTokenStore redisTokenStore(){
+    RedisTokenStore redisTokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 
+    /**
+     * 配置客户端
+     *
+     * @param clients
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(clientDetailsService());
     }
+
+    /**
+     * token失效时间
+     *
+     * @return
+     */
     @Primary
     @Bean
-    public DefaultTokenServices defaultTokenServices(){
+    public DefaultTokenServices defaultTokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setTokenStore(redisTokenStore());
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setClientDetailsService(clientDetailsService());
-        tokenServices.setAccessTokenValiditySeconds(60*60*12); // token有效期自定义设置，默认12小时
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 12); // token有效期自定义设置，默认12小时
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);//默认30天，这里修改
         return tokenServices;
     }
@@ -78,7 +92,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
     }
 
     @Bean
-    public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator(){
+    public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator() {
         return new MssWebResponseExceptionTranslator();
     }
 
@@ -86,7 +100,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         // 允许表单认证
         security.tokenKeyAccess("permitAll()");
-        security .checkTokenAccess("isAuthenticated()");
+        security.checkTokenAccess("isAuthenticated()");
         security.allowFormAuthenticationForClients();
     }
 }
