@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 public class AuthFilter  implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst("token");
+        String token = exchange.getRequest().getHeaders().getFirst("access_token");
         if (StringUtils.isNotBlank(token)) {
             return chain.filter(exchange);
         }

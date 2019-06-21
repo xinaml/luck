@@ -26,7 +26,7 @@ public class Role extends BaseEntity {
     @Column(columnDefinition = "TINYINT COMMENT '状态'")
     private Integer status;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "lk_role_menu", joinColumns = {@JoinColumn(name = "role_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "menu_id", nullable = false)})
     private Set<Menu> menuSet;

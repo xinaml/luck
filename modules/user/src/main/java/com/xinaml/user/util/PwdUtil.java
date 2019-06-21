@@ -17,4 +17,12 @@ public class PwdUtil {
     public static  boolean verify(String pwd,String encodedPwd){
         return PWD_ENCODER.matches(pwd,encodedPwd);
     }
+
+    /**
+     * 在这生成测试的 client_secret
+     * @param args
+     */
+//    public static void main(String[] args) {
+//        System.out.println(encode("123456"));
+//    }
 }

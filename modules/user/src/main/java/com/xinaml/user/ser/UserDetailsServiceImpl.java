@@ -26,6 +26,13 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserSer userSer;
+
+    /**
+     * 启动刷新token授权类型，会判断用户是否还是存活的
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.xinaml.user.entity.User user = userSer.findByUsername(username);

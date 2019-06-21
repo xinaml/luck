@@ -12,30 +12,49 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) //允许api上使用权限的PreAuthorize注解
 public class WebSecurityConf extends WebSecurityConfigurerAdapter {
+    /**
+     * 获取用户的验证配置类
+     */
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    /**
+     * 加密配置
+     *
+     * @return
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * 需要配置这个支持password模式
+     *
+     * @return
+     * @throws Exception
+     */
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    /**
+     * 权限管理器 AuthorizationServerConf认证中心需要的AuthenticationManager需要
+     *
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -43,7 +62,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .anyRequest().fullyAuthenticated()
-                .antMatchers("/oauth/token").permitAll()
+                .antMatchers("/oauth/**").permitAll()
                 .and()
                 .csrf().disable();
     }
@@ -52,7 +71,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/css/**", "/js/**", "/plugins/**", "/favicon.ico")
-                .antMatchers("/login", "/register","logout");
+                .antMatchers("/login", "/register", "logout");
     }
 
 }

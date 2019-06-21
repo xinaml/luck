@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @Author: [lgq]
  * @Date: [19-5-13 上午10:01]
- * @Description:
+ * @Description: 自定义登录或者鉴权失败时的返回信息
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */

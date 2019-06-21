@@ -6,7 +6,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-
+/**
+ * 资源认证中心
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConf extends ResourceServerConfigurerAdapter {
