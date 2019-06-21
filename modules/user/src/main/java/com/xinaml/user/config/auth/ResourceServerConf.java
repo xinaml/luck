@@ -1,5 +1,7 @@
 package com.xinaml.user.config.auth;
 
+import com.xinaml.user.config.auth.error.AuthExceptionEntryPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -12,6 +14,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConf extends ResourceServerConfigurerAdapter {
+    @Autowired
+    private AuthExceptionEntryPoint authExceptionEntryPoint;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.
@@ -21,8 +26,10 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
                 .httpBasic();
     }
 
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         super.configure(resources);
+        resources.authenticationEntryPoint(authExceptionEntryPoint);
     }
 }

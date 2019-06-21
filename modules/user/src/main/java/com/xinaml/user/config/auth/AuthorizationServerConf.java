@@ -1,6 +1,5 @@
 package com.xinaml.user.config.auth;
 
-import com.xinaml.user.error.MssWebResponseExceptionTranslator;
 import com.xinaml.user.ser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -46,12 +44,15 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private WebResponseExceptionTranslator webResponseExceptionTranslator;
 
 
     @Bean // 客户端保存在数据库
     public ClientDetailsService clientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
     }
+
 
     /**
      * 存token
@@ -98,14 +99,10 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
-        endpoints.exceptionTranslator(webResponseExceptionTranslator());//认证异常翻译
+        endpoints.exceptionTranslator(webResponseExceptionTranslator);//认证异常翻译
 
     }
 
-    @Bean
-    public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator() {
-        return new MssWebResponseExceptionTranslator();
-    }
 
     /**
      * 用来配置令牌端点(Token Endpoint)的安全约束.
@@ -116,5 +113,6 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
         security.tokenKeyAccess("permitAll()");
         security.checkTokenAccess("isAuthenticated()");
         security.allowFormAuthenticationForClients();
+
     }
 }

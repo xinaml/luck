@@ -63,7 +63,7 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
             User u = super.save(user);
             return u.getUsername();
         } else {
-            throw new SerException("密码不比配！");
+            throw new SerException("密码不比配！",401);
         }
     }
 
@@ -76,7 +76,7 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
             }
         }
 
-        throw new SerException("账号或密码错误！");
+        throw new SerException("账号或密码错误！",401);
     }
 
     @Override

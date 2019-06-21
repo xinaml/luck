@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
         return new Result(HttpStatus.INTERNAL_SERVER_ERROR.value(), MsgConst.SERVER_ERROR);
     }
 
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result handleException(HttpRequestMethodNotSupportedException e) {
         e.printStackTrace();
