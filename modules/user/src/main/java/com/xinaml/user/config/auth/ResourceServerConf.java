@@ -14,9 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConf extends ResourceServerConfigurerAdapter {
-    @Autowired
-    private AuthExceptionEntryPoint authExceptionEntryPoint;
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.
@@ -30,6 +27,6 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         super.configure(resources);
-        resources.authenticationEntryPoint(authExceptionEntryPoint);
+        resources.authenticationEntryPoint(new AuthExceptionEntryPoint());
     }
 }

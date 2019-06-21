@@ -1,5 +1,6 @@
 package com.xinaml.user.config.auth;
 
+import com.xinaml.user.config.auth.error.WebResponseExceptionTrans;
 import com.xinaml.user.ser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +15,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
-import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
@@ -44,8 +44,6 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    private WebResponseExceptionTranslator webResponseExceptionTranslator;
 
 
     @Bean // 客户端保存在数据库
@@ -99,8 +97,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
-        endpoints.exceptionTranslator(webResponseExceptionTranslator);//认证异常翻译
-
+        endpoints.exceptionTranslator(new WebResponseExceptionTrans());//认证异常翻译
     }
 
 
@@ -113,6 +110,5 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
         security.tokenKeyAccess("permitAll()");
         security.checkTokenAccess("isAuthenticated()");
         security.allowFormAuthenticationForClients();
-
     }
 }

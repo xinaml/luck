@@ -52,6 +52,22 @@ spring:
             redis-rate-limiter.replenishRate: 1 #允许用户每秒处理多少个请求（令牌桶每秒填充平均速率）
             redis-rate-limiter.burstCapacity: 1 #允许在一秒钟内完成的最大请求数（令牌桶容量）
             key-resolver: "#{@ipKeyResolver}"
+      - id: user
+        uri: lb://user
+        predicates:
+        - Path=/user/**
+        filters:
+#        - Retry=3 //路由重试
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 1 #允许用户每秒处理多少个请求（令牌桶每秒填充平均速率）
+            redis-rate-limiter.burstCapacity: 1 #允许在一秒钟内完成的最大请求数（令牌桶容量）
+            key-resolver: "#{@ipKeyResolver}"
 
 
 

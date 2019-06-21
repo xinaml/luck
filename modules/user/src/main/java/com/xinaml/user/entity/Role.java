@@ -1,5 +1,6 @@
 package com.xinaml.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xinaml.jpa.entity.BaseEntity;
 
 import javax.persistence.*;
@@ -24,9 +25,10 @@ public class Role extends BaseEntity {
     private LocalDateTime updateDate;
 
     @Column(columnDefinition = "TINYINT COMMENT '状态'")
-    private Integer status;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Integer status;
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "lk_role_menu", joinColumns = {@JoinColumn(name = "role_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "menu_id", nullable = false)})
     private Set<Menu> menuSet;

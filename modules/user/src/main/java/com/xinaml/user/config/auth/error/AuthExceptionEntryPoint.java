@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Component
 public class AuthExceptionEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,

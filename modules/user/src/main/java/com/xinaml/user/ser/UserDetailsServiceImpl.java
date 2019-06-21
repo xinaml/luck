@@ -26,7 +26,10 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserSer userSer;
-
+    @Autowired
+    private RoleSer roleSer;
+    @Autowired
+    private MenuSer menuSer;
     /**
      * 启动刷新token授权类型，会判断用户是否还是存活的
      * @param username
@@ -41,13 +44,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean accountNonExpired = true; // 过期性 :true:没过期 false:过期
         boolean credentialsNonExpired = true; // 有效性 :true:凭证有效 false:凭证无效
         boolean accountNonLocked = true; // 锁定性 :true:未锁定 false:已锁定
-        Set<Role> roles = user.getRoleSet();
+        List<Role> roles =roleSer.findByUserId(user.getId());
         for (Role role : roles) {
             //角色必须是ROLE_开头，可以在数据库中设置
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getName());
             grantedAuthorities.add(grantedAuthority);
             //获取权限
-            Set<Menu> menus = role.getMenuSet();
+            List<Menu> menus = menuSer.findByRoleId(role.getId());
             for (Menu menu : menus) {
                 GrantedAuthority authority = new SimpleGrantedAuthority(menu.getCode());
                 grantedAuthorities.add(authority);

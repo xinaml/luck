@@ -15,5 +15,6 @@ import java.util.List;
  * @Copy: [com.xinaml]
  */
 public interface MenuRep extends JapRep<Menu, MenuDTO> {
-
+    @Query(value = "select b.* from lk_role_menu a left join lk_menu b on a.role_id=?1 and a.role_id=b.id",nativeQuery = true)
+    List<Menu> findByRoleId(String roleId);
 }

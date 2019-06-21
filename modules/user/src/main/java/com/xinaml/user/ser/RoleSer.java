@@ -1,5 +1,10 @@
 package com.xinaml.user.ser;
 
+import com.xinaml.user.entity.Role;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: [lgq]
  * @Date: [19-5-13 上午10:01]
@@ -8,4 +13,7 @@ package com.xinaml.user.ser;
  * @Copy: [com.xinaml]
  */
 public interface RoleSer {
+    default List<Role> findByUserId(String userId){
+        return new ArrayList<>(0);
+    }
 }
