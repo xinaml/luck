@@ -39,7 +39,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result handleException(HttpRequestMethodNotSupportedException e) {
-        e.printStackTrace();
         return new Result(HttpStatus.METHOD_NOT_ALLOWED.value(), "请求方法【" + e.getMethod() + "】不支持!");
     }
 

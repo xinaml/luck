@@ -1,5 +1,7 @@
 package com.xinaml.user.ser;
 
+import com.xinaml.jpa.ser.Ser;
+import com.xinaml.user.dto.RoleDTO;
 import com.xinaml.user.entity.Role;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public interface RoleSer {
+public interface RoleSer extends Ser<Role, RoleDTO> {
     default List<Role> findByUserId(String userId){
         return new ArrayList<>(0);
     }

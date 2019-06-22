@@ -1,5 +1,7 @@
 package com.xinaml.user.ser;
 
+import com.xinaml.jpa.ser.ServiceImpl;
+import com.xinaml.user.dto.MenuDTO;
 import com.xinaml.user.entity.Menu;
 import com.xinaml.user.rep.MenuRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,12 @@ import java.util.List;
  * @Copy: [com.xinaml]
  */
 @Service
-public class MenuSerImpl implements MenuSer {
+public class MenuSerImpl extends ServiceImpl<Menu,MenuDTO>implements MenuSer {
     @Autowired
     private MenuRep menuRep;
 
     @Override
-    public List<Menu> findByRoleId(String userId) {
-        return menuRep.findByRoleId(userId);
+    public List<Menu> findByRoleId(String roleId) {
+        return menuRep.findByRoleId(roleId);
     }
 }

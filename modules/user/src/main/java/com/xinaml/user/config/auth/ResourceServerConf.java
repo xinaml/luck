@@ -2,6 +2,7 @@ package com.xinaml.user.config.auth;
 
 import com.xinaml.user.config.auth.error.SecurityAuthenticationEntryPoint;
 import com.xinaml.user.config.auth.error.WebResponseExceptionTrans;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -20,7 +21,8 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         OAuth2AuthenticationEntryPoint authenticationEntryPoint = new SecurityAuthenticationEntryPoint();
         authenticationEntryPoint.setExceptionTranslator(new WebResponseExceptionTrans());
-        resources.authenticationEntryPoint(authenticationEntryPoint);
+        resources
+                .authenticationEntryPoint(authenticationEntryPoint);
 
     }
 
@@ -32,7 +34,7 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
                 // 定义的不存在access_token时候响应
                 .authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
                 .and()
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/oauth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic().disable();

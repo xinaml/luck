@@ -1,5 +1,7 @@
 package com.xinaml.user.ser;
 
+import com.xinaml.jpa.ser.ServiceImpl;
+import com.xinaml.user.dto.RoleDTO;
 import com.xinaml.user.entity.Role;
 import com.xinaml.user.rep.RoleRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import java.util.List;
  * @Copy: [com.xinaml]
  */
 @Service
-public class RoleSerImpl implements RoleSer {
+public class RoleSerImpl extends ServiceImpl<Role,RoleDTO> implements RoleSer {
     @Autowired
     private RoleRep roleRep;
     @Override

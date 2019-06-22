@@ -28,8 +28,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserSer userSer;
     @Autowired
     private RoleSer roleSer;
-    @Autowired
-    private MenuSer menuSer;
     /**
      * 启动刷新token授权类型，会判断用户是否还是存活的
      * @param username
@@ -49,14 +47,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             //角色必须是ROLE_开头，可以在数据库中设置
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getName());
             grantedAuthorities.add(grantedAuthority);
-            //获取权限
-            List<Menu> menus = menuSer.findByRoleId(role.getId());
-            for (Menu menu : menus) {
-                if(menu.getUrl()!=null){
-                    GrantedAuthority authority = new SimpleGrantedAuthority(menu.getUrl());
-                    grantedAuthorities.add(authority);
-                }
-            }
         }
         UserDetails details = new User(user.getUsername(), user.getPassword(),
                 enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);

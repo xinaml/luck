@@ -1,6 +1,8 @@
 package com.xinaml.user.ser;
 
 
+import com.xinaml.jpa.ser.Ser;
+import com.xinaml.user.dto.MenuDTO;
 import com.xinaml.user.entity.Menu;
 
 import java.util.ArrayList;
@@ -13,8 +15,8 @@ import java.util.List;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public interface MenuSer {
-    default List<Menu> findByRoleId(String userId){
+public interface MenuSer extends Ser<Menu, MenuDTO> {
+    default List<Menu> findByRoleId(String roleId){
         return new ArrayList<>(0);
     }
 }

@@ -12,11 +12,16 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //允许api上使用权限的PreAuthorize注解
 public class WebSecurityConf extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
+
     /**
      * 获取用户的验证配置类
      */
@@ -65,6 +70,8 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
                 .antMatchers("/oauth/**").permitAll()
                 .and()
                 .csrf().disable();
+        http.addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
+
     }
 
     @Override
