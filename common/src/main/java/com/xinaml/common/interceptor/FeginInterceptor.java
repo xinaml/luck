@@ -1,7 +1,9 @@
 package com.xinaml.common.interceptor;
 
+import com.xinaml.common.constant.CommonConst;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -37,6 +39,14 @@ public class FeginInterceptor implements RequestInterceptor {
         while (enumeration.hasMoreElements()) {
             String key = enumeration.nextElement();
             String value = request.getHeader(key);
+            if(key.equals(CommonConst.TOKEN)){ //header传递的是access_token，更改为oatuh2接受的Authorization：Bearer token
+                key="Authorization";
+                if(StringUtils.isBlank(value)){
+                    value="Bearer"+request.getParameter(CommonConst.TOKEN);
+                }else {
+                    value="Bearer"+value;
+                }
+            }
             map.put(key, value);
         }
         return map;

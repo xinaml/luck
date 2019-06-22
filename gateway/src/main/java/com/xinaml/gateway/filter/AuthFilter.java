@@ -29,6 +29,9 @@ public class AuthFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String token = request.getHeaders().getFirst("access_token");
+        if(StringUtils.isBlank(token)){
+            token  = request.getQueryParams().getFirst("access_token");
+        }
         String url = request.getURI().getPath();
         if (StringUtils.isNotBlank(token) || url.startsWith("/oauth") || url.startsWith("/login") || url.startsWith("/register")) {
             return chain.filter(exchange);
