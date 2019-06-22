@@ -97,7 +97,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
-        endpoints.exceptionTranslator(new WebResponseExceptionTrans());//认证异常翻译
+        endpoints.exceptionTranslator(new WebResponseExceptionTrans());//认证异常
     }
 
 

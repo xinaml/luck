@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "lk_role")
 public class Role extends BaseEntity {
-    @Column(columnDefinition = " VARCHAR(56) COMMENT '角色名'")
+    @Column(columnDefinition = " VARCHAR(56) COMMENT '角色名'",nullable = false)
     private String name;
 
 

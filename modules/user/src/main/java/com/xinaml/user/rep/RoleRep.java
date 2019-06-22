@@ -17,6 +17,6 @@ import java.util.List;
  * @Copy: [com.xinaml]
  */
 public interface RoleRep extends JapRep<Role, RoleDTO> {
-    @Query(value = "select b.* from lk_user_role a left join lk_role b on a.user_id=?1 and a.role_id=b.id",nativeQuery = true)
+    @Query(value = "select b.* from lk_user_role a , lk_role b where a.user_id=?1 and a.role_id=b.id",nativeQuery = true)
     List<Role> findByUserId(String userId);
 }

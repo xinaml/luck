@@ -24,10 +24,10 @@ public class Menu extends BaseEntity {
     @Column(columnDefinition = " VARCHAR(56) COMMENT '父菜单ID'")
     private String pId;
 
-    @Column(columnDefinition = " VARCHAR(56) COMMENT '名称'")
+    @Column(columnDefinition = " VARCHAR(56) COMMENT '名称'",nullable = false)
     private String name;
 
-    @Column(columnDefinition = " VARCHAR(56) COMMENT '请求地址'")
+    @Column(columnDefinition = " VARCHAR(56) COMMENT '请求地址'",nullable = false)
     private String url;
 
     @Column(columnDefinition = "TINYINT COMMENT '菜单排序'")

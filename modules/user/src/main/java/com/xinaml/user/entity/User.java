@@ -21,10 +21,10 @@ import java.util.Set;
 @Entity
 @Table(name = "lk_user")
 public class User extends BaseEntity {
-    @Column(columnDefinition = " VARCHAR(56) COMMENT '用户名'")
+    @Column(columnDefinition = " VARCHAR(56) COMMENT '用户名'",nullable = false)
     private String username;
     @JsonIgnore
-    @Column(columnDefinition = "VARCHAR(70) COMMENT '密码' ")
+    @Column(columnDefinition = "VARCHAR(70) COMMENT '密码' ",nullable = false)
     private String password;
     @Column(columnDefinition = "DECIMAL(10,2) COMMENT '资产' ")
     private Double account;
