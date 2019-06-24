@@ -1,16 +1,17 @@
 package com.xinaml.user.ser;
 
-import com.xinaml.user.entity.Menu;
 import com.xinaml.user.entity.Role;
+import com.xinaml.user.entity.User;
+import com.xinaml.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.xinaml.user.entity.User user = userSer.findByUsername(username);
+        User user = userSer.findByUsername(username);
         if(null!=user){
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
             boolean enabled = true; // 可用性 :true:可用 false:不可用
@@ -49,9 +50,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getName());
                 grantedAuthorities.add(grantedAuthority);
             }
-            UserDetails details = new User(user.getUsername(), user.getPassword(),
+            UserVO userVO = new UserVO(user.getUsername(), user.getPassword(),
                     enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
-            return details;
+            userVO.setId(user.getId());
+            return userVO;
         }else {
             throw new  UsernameNotFoundException("账号或密码错误！");
         }
