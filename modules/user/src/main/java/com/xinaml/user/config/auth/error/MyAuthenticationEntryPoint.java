@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xinaml.common.result.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,14 +19,15 @@ import javax.servlet.http.HttpServletResponse;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-public class SecurityAuthenticationEntryPoint extends OAuth2AuthenticationEntryPoint {
+@Component
+public class MyAuthenticationEntryPoint extends OAuth2AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException)
             throws ServletException {
-        String msg ="无效的token!";
-        if(authException.getMessage().startsWith("Full authentication")){
-            msg="非法的请求！";
+        String msg = "无效的token!";
+        if (authException.getMessage().startsWith("Full authentication")) {
+            msg = "非法的请求！";
         }
         Result result = new Result(401, msg);
         response.setContentType("application/json");

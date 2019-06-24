@@ -30,7 +30,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
      * 权限验证控制器
      */
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
     /**
      * 数据源， 默认为spring中配置的datasource
      */
@@ -44,6 +44,9 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private WebResponseExceptionTrans webResponseExceptionTrans;
 
 
     @Bean // 客户端保存在数据库
@@ -97,7 +100,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
                 .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
         endpoints.tokenServices(defaultTokenServices());
-        endpoints.exceptionTranslator(new WebResponseExceptionTrans());//认证异常
+        endpoints.exceptionTranslator(webResponseExceptionTrans);//认证异常
     }
 
 

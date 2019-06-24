@@ -1,5 +1,6 @@
 package com.xinaml.user.config.auth;
 
+import com.xinaml.user.config.auth.error.MyFilterSecurityInterceptor;
 import com.xinaml.user.ser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +48,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
+
         return super.authenticationManagerBean();
     }
 
@@ -69,8 +71,8 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
                 .anyRequest().fullyAuthenticated()
                 .antMatchers("/oauth/**").permitAll()
                 .and()
-                .csrf().disable();
-        http.addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
+                .csrf().disable().addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
+
 
     }
 
@@ -78,7 +80,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/css/**", "/js/**", "/plugins/**", "/favicon.ico")
-                .antMatchers("/login", "/register", "logout");
+                .antMatchers("/login", "/register", "logout").and();
     }
 
 }

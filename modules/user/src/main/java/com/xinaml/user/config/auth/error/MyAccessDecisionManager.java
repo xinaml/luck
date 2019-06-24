@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth;
+package com.xinaml.user.config.auth.error;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
@@ -34,7 +34,7 @@ public class MyAccessDecisionManager implements  AccessDecisionManager {
                 }
             }
         }
-        throw new AccessDeniedException("no right");
+        throw new AccessDeniedException("没有访问权限");
     }
 
     @Override

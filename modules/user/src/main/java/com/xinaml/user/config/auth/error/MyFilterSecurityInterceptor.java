@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth;
+package com.xinaml.user.config.auth.error;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityMetadataSource;
