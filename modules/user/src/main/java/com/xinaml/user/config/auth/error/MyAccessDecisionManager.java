@@ -11,8 +11,11 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * 权限校验
+ */
 @Component
-public class MyAccessDecisionManager implements  AccessDecisionManager {
+public class MyAccessDecisionManager implements AccessDecisionManager {
     // decide 方法是判定是否拥有权限的决策方法，
     //authentication 是释CustomUserService中循环添加到 GrantedAuthority 对象中的权限信息集合.
     //object 包含客户端发起的请求的requset信息，可转换为 HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
@@ -20,21 +23,21 @@ public class MyAccessDecisionManager implements  AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 
-        if(null== configAttributes || configAttributes.size() <=0) {
+        if (null == configAttributes || configAttributes.size() <= 0) {
             return;
         }
         ConfigAttribute c;
         String needRole;
-        for(Iterator<ConfigAttribute> iter = configAttributes.iterator(); iter.hasNext(); ) {
+        for (Iterator<ConfigAttribute> iter = configAttributes.iterator(); iter.hasNext(); ) {
             c = iter.next();
             needRole = c.getAttribute();
-            for(GrantedAuthority ga : authentication.getAuthorities()) {//authentication 为在注释1 中循环添加到 GrantedAuthority 对象中的权限信息集合
-                if(needRole.trim().equals(ga.getAuthority())) {
+            for (GrantedAuthority ga : authentication.getAuthorities()) {//authentication 为在注释1 中循环添加到 GrantedAuthority 对象中的权限信息集合
+                if (needRole.trim().equals(ga.getAuthority())) {
                     return;
                 }
             }
         }
-        throw new AccessDeniedException("没有访问权限");
+        throw new AccessDeniedException("没有访问权限！");
     }
 
     @Override

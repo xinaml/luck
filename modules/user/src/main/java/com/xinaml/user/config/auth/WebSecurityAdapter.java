@@ -15,10 +15,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+/**
+ * security适配器
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //允许api上使用权限的PreAuthorize注解
-public class WebSecurityConf extends WebSecurityConfigurerAdapter {
+public class WebSecurityAdapter extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyFilterSecurityInterceptor myFilterSecurityInterceptor;

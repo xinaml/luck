@@ -21,11 +21,11 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import javax.sql.DataSource;
 
 /**
- * 授权认证中心
+ * 授权认证中心适配器
  */
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerAdapter extends AuthorizationServerConfigurerAdapter {
     /**
      * 权限验证控制器
      */

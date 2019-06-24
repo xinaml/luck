@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.*;
 
+/**
+ * 权限数据元
+ */
 @Component
 public class MyInvocationSecurityMetadataSource implements
         FilterInvocationSecurityMetadataSource {

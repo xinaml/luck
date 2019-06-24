@@ -11,11 +11,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
- * 资源认证中心
+ * 资源认证中心适配器
  */
 @Configuration
 @EnableResourceServer
-public class ResourceServerConf extends ResourceServerConfigurerAdapter {
+public class ResourceServerAdapter extends ResourceServerConfigurerAdapter {
     @Autowired
     private WebResponseExceptionTrans webResponseExceptionTrans;
     @Autowired

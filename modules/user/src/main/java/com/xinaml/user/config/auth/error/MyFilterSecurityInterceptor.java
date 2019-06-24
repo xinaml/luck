@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * 添加权限数据源到过滤器
+ */
 @Component
 public class MyFilterSecurityInterceptor  extends AbstractSecurityInterceptor implements Filter {
 

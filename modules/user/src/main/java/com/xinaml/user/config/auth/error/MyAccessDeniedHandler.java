@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @Author: [lgq]
  * @Date: [19-6-24 上午10:47]
- * @Description:
+ * @Description: 权限异常处理器
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */

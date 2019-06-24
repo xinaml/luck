@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: [lgq]
  * @Date: [19-6-21 下午2:00]
- * @Description:
+ * @Description: 鉴权异常处理
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
