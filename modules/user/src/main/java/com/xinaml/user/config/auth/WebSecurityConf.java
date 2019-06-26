@@ -2,6 +2,7 @@ package com.xinaml.user.config.auth;
 
 import com.xinaml.user.config.auth.error.MyFilterSecurityInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -77,12 +78,14 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
 
     }
+    @Value("#{'${auth.filter.url}'.split(',')}")
+    private String[] filterUrls;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+//        以下资源不受Security 保护
         web.ignoring()
-                .antMatchers("/css/**", "/js/**", "/plugins/**", "/favicon.ico")
-                .antMatchers("/login", "/register", "logout").and();
+                .antMatchers(filterUrls).and();
     }
 
 }

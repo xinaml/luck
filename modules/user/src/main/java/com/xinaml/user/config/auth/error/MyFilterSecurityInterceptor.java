@@ -8,6 +8,7 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -52,21 +53,30 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
     @Value("${enable.auth}")
     private Boolean enableAuth; //是否开启权限控制
 
+    @Value("#{'${auth.filter.url}'.split(',')}")
+    private String[] filterUrls; //不校验的资源
+
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+
     public void invoke(FilterInvocation fi) throws IOException, ServletException {
         String url = fi.getRequestUrl();
         if (!enableAuth) {//false时不进入权限校验
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
         } else {
-            if (url.startsWith("/oauth") || url.equals("/register") || url.equals("/login")) {//不校验
-                fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-            } else {//校验权限
-                InterceptorStatusToken token = super.beforeInvocation(fi);
-                try {
+            for (String f : filterUrls) {
+                if (antPathMatcher.match(f, url)) {//不校验
                     fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-                } finally {
-                    super.afterInvocation(token, null);
+                    return;
                 }
             }
+            //校验权限
+            InterceptorStatusToken token = super.beforeInvocation(fi);
+            try {
+                fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+            } finally {
+                super.afterInvocation(token, null);
+            }
+
         }
     }
 
