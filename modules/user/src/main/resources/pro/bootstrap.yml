@@ -74,3 +74,6 @@ management:
       exposure:
         include: "*"
 #        http://localhost:8081/actuator/refresh 手动刷新配置，自动刷新暂时不做
+#是否开启url权限控制
+enable:
+  auth: true

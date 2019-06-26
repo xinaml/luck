@@ -23,7 +23,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 
-        if (null == configAttributes || configAttributes.size() <= 0) {
+        if (null == configAttributes || configAttributes.size() <= 0) { //如果url的角色列表为null，则不校验
             return;
         }
         ConfigAttribute c;

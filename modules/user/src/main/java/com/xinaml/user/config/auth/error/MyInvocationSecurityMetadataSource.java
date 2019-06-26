@@ -4,6 +4,7 @@ import com.xinaml.user.entity.Menu;
 import com.xinaml.user.ser.MenuSer;
 import com.xinaml.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -27,7 +28,7 @@ public class MyInvocationSecurityMetadataSource implements
 
 
 
-    private HashMap<String, Collection<ConfigAttribute>> map = null;
+    private HashMap<String, Collection<ConfigAttribute>> map = null; //url->> 可访问的角色列表
 
 
     //此方法是为了判定用户请求的url 是否在权限表中，如果在权限表中，则返回给 decide 方法，用来判定用户是否有此权限。如果不在权限表中则放行。

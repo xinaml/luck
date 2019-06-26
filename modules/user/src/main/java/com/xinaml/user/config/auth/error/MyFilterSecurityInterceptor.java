@@ -1,6 +1,7 @@
 package com.xinaml.user.config.auth.error;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
@@ -41,24 +42,32 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
      * fi里面有一个被拦截的url
      * 里面调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
      * 再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够
+     *
      * @param fi
      * @throws IOException
      * @throws ServletException
      */
+
+
+    @Value("${enable.auth}")
+    private Boolean enableAuth; //是否开启权限控制
+
     public void invoke(FilterInvocation fi) throws IOException, ServletException {
         String url = fi.getRequestUrl();
-        if (url.startsWith("/oauth") || url.equals("/register") || url.equals("/login")) {//不校验
+        if (!enableAuth) {//false时不进入权限校验
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-        } else {//校验权限
-            InterceptorStatusToken token = super.beforeInvocation(fi);
-            try {
+        } else {
+            if (url.startsWith("/oauth") || url.equals("/register") || url.equals("/login")) {//不校验
                 fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-            } finally {
-                super.afterInvocation(token, null);
+            } else {//校验权限
+                InterceptorStatusToken token = super.beforeInvocation(fi);
+                try {
+                    fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+                } finally {
+                    super.afterInvocation(token, null);
+                }
             }
         }
-
-
     }
 
     @Override
