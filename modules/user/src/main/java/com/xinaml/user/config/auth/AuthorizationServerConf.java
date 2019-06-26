@@ -1,7 +1,6 @@
 package com.xinaml.user.config.auth;
 
 import com.xinaml.user.config.auth.error.WebResponseExceptionTrans;
-import com.xinaml.user.ser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerAdapter extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapter {
     /**
      * 权限验证控制器
      */

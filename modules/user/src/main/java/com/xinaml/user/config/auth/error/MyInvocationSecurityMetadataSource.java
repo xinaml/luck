@@ -26,37 +26,16 @@ public class MyInvocationSecurityMetadataSource implements
         FilterInvocationSecurityMetadataSource {
 
 
-    @Autowired
-    private MenuSer menuSer;
+
     private HashMap<String, Collection<ConfigAttribute>> map = null;
 
-    /**
-     * 加载权限表中所有权限
-     */
-    public void loadResourceDefine() {
-        map = new HashMap<>();
-        Collection<ConfigAttribute> array;
-        ConfigAttribute cfg;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserVO u = (UserVO) authentication.getPrincipal();
-        for (GrantedAuthority authority : u.getAuthorities()) {
-            array = new ArrayList<>();
-            cfg = new SecurityConfig(authority.getAuthority());
-            array.add(cfg);
-            List<Menu> permissions = menuSer.findAll();//findByRoleId
-            for (Menu permission : permissions) {
-                map.put(permission.getUrl(), array);
-            }
-        }
-    }
 
     //此方法是为了判定用户请求的url 是否在权限表中，如果在权限表中，则返回给 decide 方法，用来判定用户是否有此权限。如果不在权限表中则放行。
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-        if (null == map ) {
+        if (null == map ||map.size()==0 ) {
             loadResourceDefine();
         }
-        //object 中包含用户请求的request 信息
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         AntPathRequestMatcher matcher;
         String resUrl = "";
@@ -67,11 +46,30 @@ public class MyInvocationSecurityMetadataSource implements
                 return map.get(resUrl);
             }
         }
-        String url = request.getRequestURI();
-        if (url.startsWith("/oauth") || url.equals("/register") || url.equals("/login")) {
-            return null;
-        }
         throw new AccessDeniedException("没有访问权限");
+    }
+
+
+
+    /**
+     * 加载权限表中所有权限
+     */
+    public void loadResourceDefine() {
+        map = new HashMap<>();
+        Collection<ConfigAttribute> array;
+        ConfigAttribute cfg;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserVO u = (UserVO) authentication.getPrincipal();
+        Map<String,List<String>> rolePermissions = u.getPermissions();//角色，权限列表
+        for (GrantedAuthority authority : u.getAuthorities()) {
+            array = new ArrayList<>();
+            cfg = new SecurityConfig(authority.getAuthority());
+            array.add(cfg);
+            List<String> permissions = rolePermissions.get(authority.getAuthority());////获取角色资源
+            for (String permission : permissions) {
+                map.put(permission, array);
+            }
+        }
     }
 
     @Override

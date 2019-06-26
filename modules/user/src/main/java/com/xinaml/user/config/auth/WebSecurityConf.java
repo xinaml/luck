@@ -1,7 +1,6 @@
 package com.xinaml.user.config.auth;
 
 import com.xinaml.user.config.auth.error.MyFilterSecurityInterceptor;
-import com.xinaml.user.ser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //允许api上使用权限的PreAuthorize注解
-public class WebSecurityAdapter extends WebSecurityConfigurerAdapter {
+public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyFilterSecurityInterceptor myFilterSecurityInterceptor;

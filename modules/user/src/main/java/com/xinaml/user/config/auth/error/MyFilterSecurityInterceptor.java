@@ -15,7 +15,7 @@ import java.io.IOException;
  * 添加权限数据源到过滤器
  */
 @Component
-public class MyFilterSecurityInterceptor  extends AbstractSecurityInterceptor implements Filter {
+public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
     @Autowired
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
@@ -33,23 +33,32 @@ public class MyFilterSecurityInterceptor  extends AbstractSecurityInterceptor im
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         FilterInvocation fi = new FilterInvocation(request, response, chain);
         invoke(fi);
     }
 
-
+    /**
+     * fi里面有一个被拦截的url
+     * 里面调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
+     * 再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够
+     * @param fi
+     * @throws IOException
+     * @throws ServletException
+     */
     public void invoke(FilterInvocation fi) throws IOException, ServletException {
-//fi里面有一个被拦截的url
-//里面调用MyInvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取fi对应的所有权限
-//再调用MyAccessDecisionManager的decide方法来校验用户的权限是否足够
-        InterceptorStatusToken token = super.beforeInvocation(fi);
-        try {
-//执行下一个拦截器
+        String url = fi.getRequestUrl();
+        if (url.startsWith("/oauth") || url.equals("/register") || url.equals("/login")) {//不校验
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
-        } finally {
-            super.afterInvocation(token, null);
+        } else {//校验权限
+            InterceptorStatusToken token = super.beforeInvocation(fi);
+            try {
+                fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+            } finally {
+                super.afterInvocation(token, null);
+            }
         }
+
+
     }
 
     @Override

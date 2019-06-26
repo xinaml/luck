@@ -1,7 +1,11 @@
-package com.xinaml.user.ser;
+package com.xinaml.user.config.auth;
 
+import com.xinaml.user.entity.Menu;
 import com.xinaml.user.entity.Role;
 import com.xinaml.user.entity.User;
+import com.xinaml.user.ser.MenuSer;
+import com.xinaml.user.ser.RoleSer;
+import com.xinaml.user.ser.UserSer;
 import com.xinaml.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,10 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: [lgq]
@@ -29,6 +30,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserSer userSer;
     @Autowired
     private RoleSer roleSer;
+    @Autowired
+    private MenuSer menuSer;
     /**
      * 启动刷新token授权类型，会判断用户是否还是存活的
      * @param username
@@ -45,14 +48,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             boolean credentialsNonExpired = true; // 有效性 :true:凭证有效 false:凭证无效
             boolean accountNonLocked = true; // 锁定性 :true:未锁定 false:已锁定
             List<Role> roles =roleSer.findByUserId(user.getId());
+            Map<String,List<String>> rolePermissions = new HashMap<>();
             for (Role role : roles) {
-                //角色必须是ROLE_开头，可以在数据库中设置
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getName());
+                String roleName ="ROLE_" + role.getName();
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(roleName);
                 grantedAuthorities.add(grantedAuthority);
+                List<Menu> menus = menuSer.findByRoleId(role.getId());
+                List<String> permissions = new ArrayList<>();
+                for(Menu menu:menus){
+                    permissions.add(menu.getUrl());
+                }
+                rolePermissions.put(roleName,permissions);
             }
             UserVO userVO = new UserVO(user.getUsername(), user.getPassword(),
                     enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
             userVO.setId(user.getId());
+            userVO.setPermissions(rolePermissions);
             return userVO;
         }else {
             throw new  UsernameNotFoundException("账号或密码错误！");

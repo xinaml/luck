@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: [lgq]
@@ -14,14 +15,15 @@ import java.util.List;
  * @Copy: [com.xinaml]
  */
 public class UserVO extends User {
-    private String id;
     public UserVO(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
-
     public UserVO(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
+
+    private String id;
+    private Map<String,List<String>> permissions; //role -  permissions
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
@@ -69,6 +71,14 @@ public class UserVO extends User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Map<String, List<String>> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Map<String, List<String>> permissions) {
+        this.permissions = permissions;
     }
 
 }

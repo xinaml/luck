@@ -8,7 +8,7 @@ package com.xinaml.gateway.result;
  * @Copy: [com.xinaml]
  */
 public class Result {
-    private Integer code;
+    private Integer code=0;
     private String msg;
     private Object data;
 
@@ -20,6 +20,9 @@ public class Result {
         this.code = code;
     }
 
+    public Result(Object data) {
+        this.data = data;
+    }
     public Result(Integer code, String msg) {
         this.msg = msg;
         this.code = code;
