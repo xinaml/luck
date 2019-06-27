@@ -10,6 +10,7 @@ import com.xinaml.user.to.RegisterTO;
 import com.xinaml.user.util.PwdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,8 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
     private String port;
     @Autowired
     private UserRep userRep;
+    @Autowired
+    private ConsumerTokenServices consumerTokenServices;
 
     @Override
     public User findByUsername(String username) {
@@ -81,7 +84,9 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
 
     @Override
     public String logout(String token) {
-
+        if (consumerTokenServices.revokeToken(token)){
+            return "退出成功！";
+        }
         return "退出失败！";
     }
 }

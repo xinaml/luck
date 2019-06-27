@@ -74,7 +74,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
                 .anyRequest().fullyAuthenticated()
                 .antMatchers("/oauth/**").permitAll()
                 .and()
-                .csrf().disable().addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
+                .csrf().disable().addFilterAfter(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
 
 
     }

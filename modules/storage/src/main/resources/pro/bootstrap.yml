@@ -27,7 +27,7 @@ spring:
     config:
       uri: http://config:9000
       label: master
-      profile: dev
+      profile: pro
       discovery:
         enabled: true
         service-id: config

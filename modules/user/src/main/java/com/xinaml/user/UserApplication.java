@@ -14,8 +14,8 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableEurekaClient
 @SpringBootApplication
+@EnableEurekaClient
 @EnableFeignClients
 @EnableTransactionManagement //开启事务
 @EnableJpaRepositories(basePackages = {"com.xinaml.user.rep"}) //持久化接口
