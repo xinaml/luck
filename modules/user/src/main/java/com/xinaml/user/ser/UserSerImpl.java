@@ -37,6 +37,11 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
         return userRep.findByUsername(username);
     }
 
+    @Override
+    public User findByMobile(String mobile) {
+        return null;
+    }
+
     @Transactional
     @Override
     public User save(User user) {

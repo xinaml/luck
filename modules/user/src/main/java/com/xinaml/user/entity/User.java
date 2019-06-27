@@ -29,6 +29,9 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "DECIMAL(10,2) COMMENT '资产' ")
     private Double account;
 
+    @Column(columnDefinition = "VARCHAR(11) COMMENT '手机' ",nullable = false)
+    private String mobile;
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
            @JoinTable(name="lk_user_role",joinColumns={@JoinColumn(name="user_id",nullable = false)},
@@ -67,4 +70,11 @@ public class User extends BaseEntity {
         this.roleSet = roleSet;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }

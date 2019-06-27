@@ -18,6 +18,10 @@ public interface UserSer extends Ser<User, UserDTO> {
         return null;
     }
 
+    default User findByMobile(String mobile) {
+        return null;
+    }
+
     default User save(User user) {
         return null;
     }
@@ -33,6 +37,7 @@ public interface UserSer extends Ser<User, UserDTO> {
     default String login(String username ,String password){
         return null;
     }
+
     default String logout(String token ){
         return null;
     }

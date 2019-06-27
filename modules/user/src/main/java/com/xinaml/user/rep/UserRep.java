@@ -13,4 +13,5 @@ import com.xinaml.user.entity.User;
  */
 public interface UserRep extends JapRep<User, UserDTO> {
     User findByUsername(String username);
+    User findByMobile(String mobile);
 }
