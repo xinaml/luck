@@ -1,0 +1,16 @@
+#端口
+server:
+  port: 8082
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: order
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+foo : abc

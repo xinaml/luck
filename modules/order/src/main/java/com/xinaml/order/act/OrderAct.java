@@ -104,9 +104,6 @@ public class OrderAct {
 
     @GetMapping("/foo")
     public String from() {
-        if (true) {
-            throw new SerException("xxxx");
-        }
         return this.foo;
     }
 }

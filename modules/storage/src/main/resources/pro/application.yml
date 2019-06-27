@@ -1,0 +1,16 @@
+#端口
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: UTF-8
+#服务名
+spring:
+  application:
+    name: storage
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+foo : abc

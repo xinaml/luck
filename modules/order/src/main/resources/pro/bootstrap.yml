@@ -1,12 +1,9 @@
-#正式环境配置
-#服务名
+#开发环境配置
 spring:
-  application:
-    name: order
   redis:
     host: localhost
-    password: root
     port: 6379
+    password: root
   jpa:
     database: mysql
     show-sql: true
@@ -35,20 +32,8 @@ spring:
     alibaba:
       seata:
         tx-service-group: my_test_tx_group
-  http:
-    encoding:
-      charset: utf-8
-      force: true
-      enabled: true
 
-
-#端口
-server:
-  port: 8082
-  tomcat:
-    uri-encoding: UTF-8
-
-#注册到服务治理（如果是集群，也只需要向一个eureka注册即可）理
+#注册到服务治理（如果是集群，也只需要向一个eureka注册即可）
 eureka:
   client:
     serviceUrl:
@@ -58,10 +43,12 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
 #远程调用超时
 ribbon:
   ReadTimeout: 3000
   ConnectTimeout: 200
+
 #获取到HttpServletRequest
 hystrix:
   command:
@@ -69,10 +56,11 @@ hystrix:
       execution:
         isolation:
           strategy: SEMAPHORE
+
 management:
   endpoints:
     web:
       exposure:
         include: "*"
 #        http://localhost:8082/actuator/refresh 手动刷新配置，自动刷新暂时不做
-foo : abc
+
