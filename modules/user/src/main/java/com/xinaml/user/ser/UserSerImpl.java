@@ -71,7 +71,7 @@ public class UserSerImpl extends ServiceImpl<User, UserDTO> implements UserSer {
             User u = super.save(user);
             return u.getUsername();
         } else {
-            throw new SerException("密码不比配！",401);
+            throw new SerException("密码不匹配！",401);
         }
     }
 

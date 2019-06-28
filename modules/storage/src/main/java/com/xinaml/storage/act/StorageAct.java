@@ -39,11 +39,6 @@ public class StorageAct {
     }
 
 
-    @GetMapping("get")
-    public Storage get(String name) {
-        Storage storage = storageSer.findAll().get(0);
-        return storage;
-    }
 
     @GetMapping("save")
     public Storage save(Storage storage) {

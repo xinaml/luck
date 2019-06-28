@@ -20,6 +20,9 @@ spring:
       max-active: 10
       min-idle: 5
       max-wait: 2000
+
+
+
 #远程配置
   cloud:
     alibaba:
