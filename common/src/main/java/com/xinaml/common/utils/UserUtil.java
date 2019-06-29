@@ -6,6 +6,8 @@ import com.xinaml.common.redis.RedisRep;
 import com.xinaml.common.vo.UserVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * @Author: [lgq]
@@ -25,6 +27,11 @@ public class UserUtil {
             }
         }
         throw new SerException("非法请求！", HttpStatus.UNAUTHORIZED.value());
+    }
+    public static UserVO getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserVO u = (UserVO) authentication.getPrincipal();
+        return u;
     }
 
 

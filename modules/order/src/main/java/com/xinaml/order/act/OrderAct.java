@@ -1,11 +1,8 @@
 package com.xinaml.order.act;
 
-import com.xinaml.common.exception.SerException;
 import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.common.utils.UserUtil;
-import com.xinaml.common.vo.UserVO;
 import com.xinaml.order.feign.StorageFeign;
-import com.xinaml.order.feign.UserFeign;
 import com.xinaml.order.vo.StorageVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotBlank;
 
 /**
  * @Author: [lgq]

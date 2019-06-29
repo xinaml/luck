@@ -39,7 +39,6 @@ public class StorageAct {
     }
 
 
-
     @GetMapping("save")
     public Storage save(Storage storage) {
         return storageSer.save(storage);

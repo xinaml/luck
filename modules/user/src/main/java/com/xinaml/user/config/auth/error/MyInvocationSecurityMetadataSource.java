@@ -1,8 +1,8 @@
 package com.xinaml.user.config.auth.error;
 
+import com.xinaml.common.vo.UserVO;
 import com.xinaml.user.entity.Menu;
 import com.xinaml.user.ser.MenuSer;
-import com.xinaml.user.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;
