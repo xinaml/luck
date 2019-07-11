@@ -49,6 +49,14 @@ hystrix:
       execution:
         isolation:
           strategy: SEMAPHORE
+#token有效期，小时
+token:
+  refresh:
+    validity: 168
+  access:
+    validity: 24
+
+
 
 management:
   endpoints:

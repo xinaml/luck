@@ -75,7 +75,7 @@ public class OAuth2ResourceConf extends ResourceServerConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
-                .authorizeRequests().antMatchers("/api/**").permitAll()
+                .authorizeRequests().antMatchers("/favicon.ico").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic().disable();

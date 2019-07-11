@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@RequestMapping("api")
 @RestController
 public class TxAct {
     @Autowired

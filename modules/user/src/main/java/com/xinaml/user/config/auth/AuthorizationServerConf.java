@@ -2,6 +2,7 @@ package com.xinaml.user.config.auth;
 
 import com.xinaml.user.config.auth.error.WebResponseExceptionTrans;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -73,6 +74,12 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
         clients.withClientDetails(clientDetailsService());
     }
 
+    @Value("#{'${token.access.validity}'}")
+    private Integer accessTokenValidity = 60 * 60;
+
+    @Value("#{'${token.refresh.validity}'}")
+    private Integer refreshTokenValidity = 60 * 60;
+
     /**
      * token失效时间
      *
@@ -85,8 +92,8 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
         tokenServices.setTokenStore(redisTokenStore());
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setClientDetailsService(clientDetailsService());
-        tokenServices.setAccessTokenValiditySeconds(60 * 60 * 12); // token有效期自定义设置，默认12小时
-        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);//默认30天，这里修改
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * accessTokenValidity); // token有效期自定义设置，默认12小时
+        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * refreshTokenValidity);//默认30天，这里修改
         return tokenServices;
     }
 

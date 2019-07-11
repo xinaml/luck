@@ -2,6 +2,7 @@ package com.xinaml.order.act;
 
 import com.xinaml.common.hystrix.HystrixCommand;
 import com.xinaml.common.utils.UserUtil;
+import com.xinaml.common.vo.UserVO;
 import com.xinaml.order.feign.StorageFeign;
 import com.xinaml.order.vo.StorageVO;
 import org.slf4j.Logger;
