@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth.error;
+package com.xinaml.common.auth;
 
 import com.xinaml.common.result.Result;
 import com.xinaml.common.utils.ResponseUtil;
@@ -18,7 +18,6 @@ import java.io.IOException;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Component
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override

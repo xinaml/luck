@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth.error;
+package com.xinaml.common.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xinaml.common.result.Result;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Component
 public class MyAuthenticationEntryPoint extends OAuth2AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,

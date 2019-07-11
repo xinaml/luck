@@ -1,7 +1,8 @@
 package com.xinaml.order.config;
 
+import com.xinaml.common.auth.MyAccessDeniedHandler;
+import com.xinaml.common.auth.MyAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
@@ -23,25 +25,11 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 @Configuration
 @EnableResourceServer
 public class OAuth2ResourceConf extends ResourceServerConfigurerAdapter {
-    @Autowired
-    LoadBalancerClient loadBalancerClient;
-//    @Primary
-//    @Bean
-//    public RemoteTokenServices tokenServices() {
-//
-//        ServiceInstance instance = loadBalancerClient.choose("user");
-//        URI uri = instance.getUri();
-//        // 令牌申请的地址
-//        String authUrl = uri + "/oauth/check_token";
-//        final RemoteTokenServices tokenService = new RemoteTokenServices();
-//        tokenService.setCheckTokenEndpointUrl(authUrl);
-//        tokenService.setClientId("webApp");
-//        tokenService.setClientSecret("123456");
-//        return tokenService;
-//    }
+
 
     /**
      * 通过redis去校验token
+     *
      * @return
      */
     @Primary
@@ -67,6 +55,7 @@ public class OAuth2ResourceConf extends ResourceServerConfigurerAdapter {
 
     /**
      * 除了api,其他都拦截
+     *
      * @param http
      * @throws Exception
      */
@@ -75,9 +64,21 @@ public class OAuth2ResourceConf extends ResourceServerConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
+                .exceptionHandling().authenticationEntryPoint(new MyAuthenticationEntryPoint())
+                .accessDeniedHandler(new MyAccessDeniedHandler())
+                .and()
                 .authorizeRequests().antMatchers("/favicon.ico").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic().disable();
     }
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources
+                .authenticationEntryPoint(new MyAuthenticationEntryPoint());
+
+    }
+
+
 }
