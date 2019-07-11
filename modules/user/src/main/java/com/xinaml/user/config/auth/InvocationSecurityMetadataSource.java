@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth.error;
+package com.xinaml.user.config.auth;
 
 import com.xinaml.common.vo.UserVO;
 import com.xinaml.user.entity.Menu;
@@ -23,7 +23,7 @@ import java.util.*;
  * 权限数据元
  */
 @Component
-public class MyInvocationSecurityMetadataSource implements
+public class InvocationSecurityMetadataSource implements
         FilterInvocationSecurityMetadataSource {
 
 

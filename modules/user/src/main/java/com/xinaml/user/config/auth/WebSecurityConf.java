@@ -1,6 +1,7 @@
 package com.xinaml.user.config.auth;
 
-import com.xinaml.user.config.auth.error.MyFilterSecurityInterceptor;
+import com.xinaml.user.config.filter.MyFilterSecurityInterceptor;
+import com.xinaml.user.config.auth.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,7 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
      * 获取用户的验证配置类
      */
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     /**
      * 加密配置

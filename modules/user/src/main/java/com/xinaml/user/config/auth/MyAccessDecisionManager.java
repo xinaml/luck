@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth.error;
+package com.xinaml.user.config.auth;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;

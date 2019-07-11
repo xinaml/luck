@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth;
+package com.xinaml.user.config.auth.service;
 
 import com.xinaml.common.vo.UserVO;
 import com.xinaml.user.entity.Menu;
@@ -13,21 +13,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
  * @Author: [lgq]
- * @Date: [19-5-13 上午10:01]
+ * @Date: [19-7-11 下午2:53]
  * @Description:
  * @Version: [1.0.0]
  * @Copy: [com.xinaml]
  */
-@Service
-public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
-    private UserSer userSer;
+public abstract class BaseUserDetailService implements UserDetailsService {
+  
     @Autowired
     private RoleSer roleSer;
     @Autowired
@@ -42,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userSer.findByUsername(username);
+        User user = getUser(username);
         if (null != user) {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
             boolean enabled = true; // 可用性 :true:可用 false:不可用
@@ -74,4 +71,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
+    protected abstract User getUser(String var1) ;
 }

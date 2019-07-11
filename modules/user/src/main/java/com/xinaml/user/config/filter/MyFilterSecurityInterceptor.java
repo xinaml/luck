@@ -1,5 +1,6 @@
-package com.xinaml.user.config.auth.error;
+package com.xinaml.user.config.filter;
 
+import com.xinaml.user.config.auth.MyAccessDecisionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.SecurityMetadataSource;

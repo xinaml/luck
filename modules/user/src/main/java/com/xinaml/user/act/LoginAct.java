@@ -17,11 +17,6 @@ public class LoginAct {
     @Autowired
     private UserSer userSer;
 
-    @PostMapping("login")
-    public String login(String username, String password) {
-        String token = userSer.login(username, password);
-        return token;
-    }
 
     @PostMapping("logout")
     public String logout(String token) {

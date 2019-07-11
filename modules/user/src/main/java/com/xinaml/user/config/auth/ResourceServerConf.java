@@ -2,7 +2,6 @@ package com.xinaml.user.config.auth;
 
 import com.xinaml.common.auth.MyAccessDeniedHandler;
 import com.xinaml.common.auth.MyAuthenticationEntryPoint;
-import com.xinaml.user.config.auth.error.WebResponseExceptionTrans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

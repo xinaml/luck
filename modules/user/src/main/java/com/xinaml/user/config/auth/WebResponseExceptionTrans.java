@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth.error;
+package com.xinaml.user.config.auth;
 
 import com.xinaml.common.result.Result;
 import org.springframework.http.HttpHeaders;

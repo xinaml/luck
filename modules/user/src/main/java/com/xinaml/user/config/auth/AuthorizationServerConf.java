@@ -1,6 +1,6 @@
 package com.xinaml.user.config.auth;
 
-import com.xinaml.user.config.auth.error.WebResponseExceptionTrans;
+import com.xinaml.user.config.auth.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +43,7 @@ public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapte
     private RedisConnectionFactory redisConnectionFactory;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private WebResponseExceptionTrans webResponseExceptionTrans;

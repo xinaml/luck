@@ -17,4 +17,4 @@ enable:
 #权限不校验的url,及不受Security保护的url
 auth:
   filter:
-    url: /,/login,/register,/logout,**/oauth,/favicon.ico,/error
+    url: /,/login,/phoneLogin,/register,/logout,**/oauth,/favicon.ico,/error
