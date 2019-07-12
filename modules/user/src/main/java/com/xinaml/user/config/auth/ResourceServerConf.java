@@ -39,11 +39,10 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(new MyAccessDeniedHandler())
                 .and()
-                .authorizeRequests().antMatchers("/oauth/**").permitAll()
+                .authorizeRequests().antMatchers("/oauth/**","/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic().disable();
     }
-
 
 }

@@ -18,9 +18,9 @@ public class Act {
         return "success";
     }
 
-    @GetMapping({"index"})
+    @GetMapping({"hello"})
     public String index() {
 
-        return "success";
+        return "hello";
     }
 }
