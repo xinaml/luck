@@ -28,6 +28,7 @@
         <module>modules/storage</module>
         <!--用户模块-->
         <module>modules/user</module>
+        <module>modules/test</module>
     </modules>
 
 </project>

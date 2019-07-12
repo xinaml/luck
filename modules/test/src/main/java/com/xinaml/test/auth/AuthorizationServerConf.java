@@ -1,0 +1,129 @@
+package com.xinaml.test.auth;
+
+import com.xinaml.test.MyUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
+import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+/**
+ * 授权认证中心适配器
+ */
+@Configuration
+@EnableAuthorizationServer
+public class AuthorizationServerConf extends AuthorizationServerConfigurerAdapter {
+    /**
+     * 权限验证控制器
+     */
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    /**
+     * 保存token的时候需要
+     */
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    private MyUserDetailService userDetailsService;
+
+    @Autowired
+    private WebResponseExceptionTrans webResponseExceptionTrans;
+
+
+    @Bean // 客户端保存在数据库
+    public ClientDetailsService clientDetailsService() throws Exception {
+        InMemoryClientDetailsServiceBuilder inMemoryClientDetailsServiceBuilder = new InMemoryClientDetailsServiceBuilder();
+        // @formatter:off
+        inMemoryClientDetailsServiceBuilder.
+                withClient("tonr")
+                .resourceIds("user")
+                .authorizedGrantTypes("authorization_code", "implicit")
+                .authorities("ROLE_CLIENT")
+                .scopes("read", "write")
+                .secret("secret");
+        ClientDetailsService clientDetailsService = inMemoryClientDetailsServiceBuilder.build();
+
+
+        return clientDetailsService;
+    }
+
+
+    /**
+     * 存token
+     *
+     * @return
+     */
+    @Bean
+    RedisTokenStore redisTokenStore() {
+        return new RedisTokenStore(redisConnectionFactory);
+    }
+
+    /**
+     * 用来配置客户端详情服务（ClientDetailsService），
+     * 客户端详情信息在这里进行初始化，  数据库在进行client_id 与 client_secret验证时   会使用这个service进行验证
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.withClientDetails(clientDetailsService());
+    }
+
+    @Value("#{'${token.access.validity}'}")
+    private Integer accessTokenValidity = 60 * 60;
+
+    @Value("#{'${token.refresh.validity}'}")
+    private Integer refreshTokenValidity = 60 * 60;
+
+    /**
+     * token失效时间
+     *
+     * @return
+     */
+    @Primary
+    @Bean
+    public DefaultTokenServices defaultTokenServices()throws Exception {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(redisTokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setClientDetailsService(clientDetailsService());
+        tokenServices.setAccessTokenValiditySeconds(60 * 60 * accessTokenValidity); // token有效期自定义设置，默认12小时
+        tokenServices.setRefreshTokenValiditySeconds(60 * 60 * refreshTokenValidity);//默认30天，这里修改
+        return tokenServices;
+    }
+
+    /**
+     * 用来配置授权（auth）以及令牌（token）的访问端点和令牌服务   核心配置  在启动时就会进行配置
+     */
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.tokenStore(redisTokenStore())
+                .userDetailsService(userDetailsService)
+                .authenticationManager(authenticationManager);
+        endpoints.tokenServices(defaultTokenServices());
+        endpoints.exceptionTranslator(webResponseExceptionTrans);//认证异常
+    }
+
+
+    /**
+     * 用来配置令牌端点(Token Endpoint)的安全约束.
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        // 允许表单认证
+        security.tokenKeyAccess("permitAll()");
+        security.checkTokenAccess("isAuthenticated()");
+        security.allowFormAuthenticationForClients();
+    }
+}

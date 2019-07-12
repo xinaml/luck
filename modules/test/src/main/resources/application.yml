@@ -1,0 +1,30 @@
+#端口
+server:
+  port: 8089
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: test
+  main:
+    allow-bean-definition-overriding: true
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+#权限不校验的url,及不受Security保护的url
+auth:
+  filter:
+    url: /,/login,/phoneLogin,/register,/logout,**/oauth,/favicon.ico,/error
+#是否开启url权限控制
+enable:
+  auth: false
+#token有效期，小时
+token:
+  refresh:
+    validity: 168
+  access:
+    validity: 24
