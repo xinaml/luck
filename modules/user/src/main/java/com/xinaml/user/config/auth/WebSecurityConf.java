@@ -70,14 +70,13 @@ public class WebSecurityConf extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/","/hello","/login","/oauth/**").permitAll() //指定不需要验证的页面，其他的默认会跳转到登录页
+        http.authorizeRequests().antMatchers("/","/hello","/login","/info","/favicon.ico","/oauth/**").permitAll() //指定不需要验证的页面，其他的默认会跳转到登录页
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()  //支持表单提交
                 .failureForwardUrl("/error")   //自定也错误
-                .successForwardUrl("/get")  //登录成功页面
-                .defaultSuccessUrl("/get")  //登录成功页面
+                .defaultSuccessUrl("/info")  //登录成功页面
                 .and().logout()
                 .permitAll();
                 http.csrf().disable().addFilterAfter(myFilterSecurityInterceptor, FilterSecurityInterceptor.class);
