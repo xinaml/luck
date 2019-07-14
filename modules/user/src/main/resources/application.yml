@@ -9,6 +9,14 @@ spring:
     name: user
   main:
     allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: c33c43ffe6c4e3a30c23
+            client-secret: 4a2dcefcc40e0d018a5c1dce3cc0339abed7ebe8
+            client-name: Github Login
 
 #是否开启url权限控制
 enable:

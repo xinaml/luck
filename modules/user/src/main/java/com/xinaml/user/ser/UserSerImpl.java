@@ -10,6 +10,7 @@ import com.xinaml.user.to.RegisterTO;
 import com.xinaml.user.util.PwdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.token.TokenService;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

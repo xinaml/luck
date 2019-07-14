@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -221,6 +222,7 @@ public class ServiceImpl<BE extends BaseEntity, BD extends BaseDTO> implements S
         return list;
     }
 
+    @Transactional
     @Override
     public void executeSql(String sql) {
         Query query = entityManager.createNativeQuery(sql);

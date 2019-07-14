@@ -1,4 +1,4 @@
-package com.xinaml.user.config.auth;
+package com.xinaml.test.auth;
 
 import com.xinaml.common.auth.MyAccessDeniedHandler;
 import com.xinaml.common.auth.MyAuthenticationEntryPoint;
@@ -21,26 +21,14 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        MyAuthenticationEntryPoint authenticationEntryPoint = new MyAuthenticationEntryPoint();
-        authenticationEntryPoint.setExceptionTranslator(webResponseExceptionTrans);
-        resources
-                .authenticationEntryPoint(authenticationEntryPoint);
+
 
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        MyAuthenticationEntryPoint authenticationEntryPoint = new MyAuthenticationEntryPoint();
-        authenticationEntryPoint.setExceptionTranslator(webResponseExceptionTrans);
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                // 定义的不存在access_token时候响应
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .accessDeniedHandler(new MyAccessDeniedHandler())
-                .and()
-                .authorizeRequests().antMatchers("/oauth/**","/login","/phoneLogin").permitAll()
-                .anyRequest().authenticated()
+        http.
+                authorizeRequests().antMatchers("/","/hello","/login","/oauth/**").permitAll() //指定不需要验证的页面，其他的默认会跳转到登录页
                 .and()
                 .httpBasic().disable();
     }
