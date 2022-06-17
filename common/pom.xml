@@ -14,7 +14,7 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <feign.version>1.4.6.RELEASE</feign.version>
         <openfeign.version>2.1.1.RELEASE</openfeign.version>
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <groupId>com.xinaml</groupId>
