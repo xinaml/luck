@@ -18,7 +18,7 @@
     <properties>
         <luck.version>1.0</luck.version>
         <druid.version>1.1.9</druid.version>
-        <lang3.version>3.9</lang3.version>
+        <lang3.version>3.18.0</lang3.version>
         <seata.version>0.5.1</seata.version>
         <colud-seata.version>0.9.1.BUILD-SNAPSHOT</colud-seata.version>
     </properties>
